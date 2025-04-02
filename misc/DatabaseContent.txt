@@ -1,0 +1,18 @@
+Users (Employees and Administrators):
+username, email, password, role
+(1, 'admin', 'admin@example.com', 'password123', 1)
+(2, 'user1', 'user1@example.com', 'password1', 2)
+(3, 'user2', 'user2@example.com', 'password2', 2)
+
+Clients (No Password):
+name, email, phone_number
+(1, 'John Doe', 'john@example.com', '+1234567890')
+(2, 'Jane Smith', 'jane@example.com', '+0987654321')
+(3, 'Emily White', 'emily@example.com', '+1122334455')
+
+Rooms:
+hotel_name, number, location, price, availability, position, facilities
+(1, 'Hotel A', 101, 'Paris', 120.5, 1, '1st floor', 'TV, AC, WiFi')
+(2, 'Hotel B', 102, 'New York', 200.0, 0, '2nd floor', 'TV, WiFi')
+(3, 'Hotel A', 103, 'Paris', 150.0, 1, '1st floor', 'AC, WiFi')
+(4, 'Hotel C', 104, 'Tokyo', 180.75, 1, '3rd floor', 'WiFi')

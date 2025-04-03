@@ -5,9 +5,26 @@
 #include <QTextEdit>
 #include <QTabWidget>
 #include <QVBoxLayout>
+#include <QFileDialog>
 #include <QLabel>
 #include <set>
+#include <iostream>
 #include "clientpresenter.h"
+
+
+int openFileDlg(std::string& fname) {
+    QString fileName = QFileDialog::getOpenFileName(
+        nullptr, "Open File", "../", "*"
+    );
+
+    if (!fileName.isEmpty()) {
+        fname = fileName.toStdString();
+        std::cout << fileName.toStdString() << "\n";
+        return 1; // File selected successfully
+    }
+
+    return 0; // No file selected
+}
 
 DesktopGUI::DesktopGUI(QWidget *parent)
     : QMainWindow(parent),
@@ -44,17 +61,22 @@ DesktopGUI::DesktopGUI(QWidget *parent)
       presenter(new ClientPresenter(this, &roomTable)),
       currentPage(0)
 {
-    if (!database.OpenConnection("/home/karon/Documents/Git/PST1/database/Hotels.db")) {
-        QMessageBox::critical(this, "Database Error", "Failed to open the database connection.");
+    std::string fileName;
+    if (!openFileDlg(fileName)) {
+        QMessageBox::critical(this, "Database Error", "No database selected!");
         return;
     }
 
+    // std::string fileNameStr(fileName);
+    if (!database.OpenConnection(fileName)) {
+        QMessageBox::critical(this, "Database Error", "Failed to open the database connection.");
+        return;
+    }
     
     setCentralWidget(tabWidget);
 
     tabWidget->setStyleSheet("QTabBar::tab { width: 200%; }");
 
-    
     clientViewWidget->setLayout(layout);
     tabWidget->addTab(clientViewWidget, "ClientView");
 

@@ -1,10 +1,11 @@
 #include "room.h"
 
-Room::Room(int id, const std::string& location, int number, bool is_available, double price, const std::vector<std::string>& facilities)
+Room::Room(int id, const std::string& location, std::string position, int number, bool is_available, double price, const std::vector<std::string>& facilities)
 {
     this->id = id;
     this->location = location;
     this->number = number;
+    this->position = position;
     this->availability = is_available;
     this->price = price;
     this->facilities = facilities;

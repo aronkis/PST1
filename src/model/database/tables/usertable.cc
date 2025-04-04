@@ -73,3 +73,16 @@ std::vector<User> UserTable::ListUsers()
 
     return users;
 }
+
+bool UserTable::CheckCredentials(std::string username, std::string password)
+{
+    std::string command = "SELECT * FROM User WHERE username = '" + username +  "' AND password = '" + password + "';";
+    std::vector<std::vector<std::string>> result = db->ExecuteSQLQuery(command);
+
+    if (!result.empty()) 
+    {
+        return true;
+    }
+
+    return false;
+}

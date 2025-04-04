@@ -17,7 +17,8 @@ private:
     std::string hotel_name;
 
 public:
-    Room(int id, const std::string& location, int number, bool is_available, double price, const std::vector<std::string>& facilities);
+    Room(int id, const std::string& location, std::string position, int number, bool is_available, 
+        double price, const std::vector<std::string>& facilities);
 
     // Getters
     int GetId() const;

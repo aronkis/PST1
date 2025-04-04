@@ -19,6 +19,8 @@ public:
     bool UpdateUser(int user_id, const User& user);
     bool DeleteUser(int user_id);
     std::vector<User> ListUsers();
+    bool CheckCredentials(std::string username, std::string password);
+
 };
 
 #endif // USERTABLE_H

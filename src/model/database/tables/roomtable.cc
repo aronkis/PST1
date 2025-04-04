@@ -26,6 +26,17 @@ std::vector<std::string> splitString(const std::string &str, char delimiter) {
 
     return tokens;
 }
+
+std::string StringFacilities(std::vector<std::string> facilities)
+{
+    std::string facilities_str = facilities[0];
+    for (int i = 1; i < facilities.size(); i++)
+    {
+        facilities_str += ", " + facilities[i];
+    }
+    return facilities_str;
+}
+
 RoomTable::RoomTable(Database* database)
 {
     this->db = database;
@@ -34,9 +45,11 @@ RoomTable::RoomTable(Database* database)
 
 bool RoomTable::CreateRoom(const std::string& hotel_name, const Room& room)
 {
-    std::string command = "INSERT INTO Room (hotel_name, number, location, price, availability, position) VALUES ('" +
+    std::string facilities = StringFacilities(room.GetFacilities());
+
+    std::string command = "INSERT INTO Room (id, hotel_name, number, location, price, availability, position, facilities) VALUES (" + std::to_string(room.GetId()) + ", '" +
                           hotel_name + "', " + std::to_string(room.GetNumber()) + ", '" + room.GetLocation() + "', " +
-                          std::to_string(room.GetPrice()) + ", " + (room.GetAvailability() ? "1" : "0") + ", '" + room.GetPosition() + "');";
+                          std::to_string(room.GetPrice()) + ", " + (room.GetAvailability() ? "1" : "0") + ", '" + room.GetPosition() + "', '" +  facilities + "');";
     return db->ExecuteSQLCommand(command);
 }
 
@@ -45,7 +58,7 @@ Room RoomTable::ReadRoom(const std::string& hotel_name, int room_number)
     std::string command = "SELECT * FROM Room WHERE hotel_name = '" + hotel_name + "' AND number = " + std::to_string(room_number);
     std::vector<std::vector<std::string>> result = db->ExecuteSQLQuery(command);  
 
-    Room room(0, "", 0, false, 0.0, {}); 
+    Room room(0, "", "", 0, false, 0.0, {}); 
 
     if (!result.empty())
     {
@@ -59,6 +72,8 @@ Room RoomTable::ReadRoom(const std::string& hotel_name, int room_number)
             room.SetPrice(std::stod(row[4]));
             room.SetAvailability(row[5] == "1");
             room.SetPosition(row[6]);
+            std::vector<std::string> facilities = splitString(row[7], ',');
+            room.SetFacilities(facilities);
         }
     }
 
@@ -67,10 +82,16 @@ Room RoomTable::ReadRoom(const std::string& hotel_name, int room_number)
 
 bool RoomTable::UpdateRoom(const std::string& hotel_name, int room_number, const Room& room)
 {
-    std::string command = "UPDATE Room SET location = '" + room.GetLocation() + "', price = " +
-                          std::to_string(room.GetPrice()) + ", availability = " + (room.GetAvailability() ? "1" : "0") +
-                          ", position = '" + room.GetPosition() + "' WHERE hotel_name = '" + hotel_name + "' AND number = " +
-                          std::to_string(room_number) + ";";
+    std::string facilities = StringFacilities(room.GetFacilities());
+    std::string command = "UPDATE Room SET location = '" + room.GetLocation() + 
+                            "', price = " + std::to_string(room.GetPrice()) + 
+                            ", availability = " + (room.GetAvailability() ? "1" : "0") +
+                            ", position = '" + room.GetPosition() + 
+                            "', number = '" + std::to_string(room.GetNumber()) +
+                            "', id = '" + std::to_string(room.GetId()) +
+                            "', facilities = '" + facilities +
+                            "' WHERE hotel_name = '" + hotel_name + 
+                            "' AND number = '" + std::to_string(room_number) + "';";
     return db->ExecuteSQLCommand(command);
 }
 
@@ -83,14 +104,14 @@ bool RoomTable::DeleteRoom(const std::string& hotel_name, int room_number)
 std::vector<Room> RoomTable::ListRooms()
 {
     std::vector<Room> rooms;
-    std::string command = "SELECT * FROM Room";
+    std::string command = "SELECT * FROM Room ORDER BY location ASC, number ASC;";
     std::vector<std::vector<std::string>> result = db->ExecuteSQLQuery(command);  
 
     for (const auto& row : result)
     {
         if (row.size() >= 7) 
         {
-            Room room(0, "", 0, false, 0.0, {});
+            Room room(0, "", "", 0, false, 0.0, {}); 
             room.SetId(std::stoi(row[0]));
             room.SetHotelName(row[1]);
             room.SetNumber(std::stoi(row[2]));
@@ -118,7 +139,7 @@ std::vector<Room> RoomTable::FilterRooms(const std::string& location, const std:
     {
         if (row.size() >= 7)
         {
-            Room room(0, "", 0, false, 0.0, {});
+            Room room(0, "", "", 0, false, 0.0, {}); 
             room.SetId(std::stoi(row[0]));
             room.SetHotelName(row[1]);
             room.SetNumber(std::stoi(row[2]));

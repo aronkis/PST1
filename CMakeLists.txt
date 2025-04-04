@@ -23,11 +23,11 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-set(HEADERS
+set(CLIENT_HEADERS
     include/view/client/desktopgui.h
 )
 
-set(SOURCES
+set(CLIENT_SOURCES
     src/view/desktopgui.cc
     src/model/client.cc
     src/model/room.cc
@@ -39,7 +39,29 @@ set(SOURCES
     src/presenter/client/clientpresenter.cc
 )
 
-add_executable(DesktopGui ${SOURCES} ${HEADERS})
+add_executable(ClientGUI ${CLIENT_SOURCES} ${CLIENT_HEADERS})
 
-target_link_libraries(DesktopGui ${SQLite3_LIBRARIES})
-target_link_libraries(DesktopGui Qt5::Widgets)
+target_link_libraries(ClientGUI ${SQLite3_LIBRARIES})
+target_link_libraries(ClientGUI Qt5::Widgets)
+
+set(User_HEADERS
+    include/view/user/userdesktop.h
+)
+
+set(User_SOURCES
+    src/view/userdesktop.cc
+    src/model/client.cc
+    src/model/room.cc
+    src/model/user.cc
+    src/model/database/database.cc
+    src/model/database/tables/clienttable.cc
+    src/model/database/tables/roomtable.cc
+    src/model/database/tables/usertable.cc
+    src/presenter/client/clientpresenter.cc
+    src/presenter/user/userpresenter.cc
+)
+
+add_executable(UserGUI ${User_SOURCES} ${User_HEADERS})
+
+target_link_libraries(UserGUI ${SQLite3_LIBRARIES})
+target_link_libraries(UserGUI Qt5::Widgets)

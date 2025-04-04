@@ -3,7 +3,6 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QTextEdit>
-#include <QTabWidget>
 #include <QVBoxLayout>
 #include <QFileDialog>
 #include <QLabel>
@@ -19,7 +18,6 @@ int openFileDlg(std::string& fname) {
 
     if (!fileName.isEmpty()) {
         fname = fileName.toStdString();
-        std::cout << fileName.toStdString() << "\n";
         return 1; // File selected successfully
     }
 
@@ -29,9 +27,6 @@ int openFileDlg(std::string& fname) {
 DesktopGUI::DesktopGUI(QWidget *parent)
     : QMainWindow(parent),
       centralWidget(new QWidget(this)),
-      tabWidget(new QTabWidget(this)), 
-      clientViewWidget(new QWidget(this)), 
-      userViewWidget(new QWidget(this)),  
       layout(new QVBoxLayout),
       label(new QLabel("Welcome to the Client GUI", this)),
       printAvailableButton(new QPushButton("Print Available Rooms", this)),
@@ -50,12 +45,6 @@ DesktopGUI::DesktopGUI(QWidget *parent)
       positionField(new QLineEdit(this)), 
       facilitiesField(new QLineEdit(this)), 
       facilitiesListWidget(new QListWidget(this)),
-      loginButton(new QPushButton("Login", userViewWidget)),
-      createRoomButton(new QPushButton("Create Room", userViewWidget)),
-      readRoomButton(new QPushButton("Read Room", userViewWidget)),
-      updateRoomButton(new QPushButton("Update Room", userViewWidget)),
-      deleteRoomButton(new QPushButton("Delete Room", userViewWidget)),
-      logoutButton(new QPushButton("Logout", userViewWidget)),
       database(),
       roomTable(&database),
       presenter(new ClientPresenter(this, &roomTable)),
@@ -64,21 +53,18 @@ DesktopGUI::DesktopGUI(QWidget *parent)
     std::string fileName;
     if (!openFileDlg(fileName)) {
         QMessageBox::critical(this, "Database Error", "No database selected!");
+        exit(0);
         return;
     }
 
-    // std::string fileNameStr(fileName);
     if (!database.OpenConnection(fileName)) {
         QMessageBox::critical(this, "Database Error", "Failed to open the database connection.");
+        exit(0);
         return;
     }
-    
-    setCentralWidget(tabWidget);
 
-    tabWidget->setStyleSheet("QTabBar::tab { width: 200%; }");
-
-    clientViewWidget->setLayout(layout);
-    tabWidget->addTab(clientViewWidget, "ClientView");
+    setCentralWidget(centralWidget); // Set centralWidget directly
+    centralWidget->setLayout(layout);
 
     QSpacerItem *topSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
     QSpacerItem *bottomSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -142,54 +128,6 @@ DesktopGUI::DesktopGUI(QWidget *parent)
     connect(filterRoomsButton, &QPushButton::clicked, this, &DesktopGUI::onFilterRoomsClicked);
     connect(nextButton, &QPushButton::clicked, this, &DesktopGUI::onNextButtonClicked);
     connect(prevButton, &QPushButton::clicked, this, &DesktopGUI::onPrevButtonClicked);
-
-    
-    QVBoxLayout *userViewLayout = new QVBoxLayout(userViewWidget);
-
-    
-    userViewLayout->addWidget(loginButton);
-    userViewLayout->addWidget(createRoomButton);
-    userViewLayout->addWidget(readRoomButton);
-    userViewLayout->addWidget(updateRoomButton);
-    userViewLayout->addWidget(deleteRoomButton);
-    userViewLayout->addWidget(logoutButton);
-
-    
-    createRoomButton->setVisible(false);
-    readRoomButton->setVisible(false);
-    updateRoomButton->setVisible(false);
-    deleteRoomButton->setVisible(false);
-    logoutButton->setVisible(false);
-
-    tabWidget->addTab(userViewWidget, "UserView");
-
-    
-    connect(loginButton, &QPushButton::clicked, [this]() {
-        
-        QMessageBox::information(this, "Login", "Login successful!");
-
-        
-        loginButton->setVisible(false);
-        createRoomButton->setVisible(true);
-        readRoomButton->setVisible(true);
-        updateRoomButton->setVisible(true);
-        deleteRoomButton->setVisible(true);
-        logoutButton->setVisible(true);
-    });
-
-    
-    connect(logoutButton, &QPushButton::clicked, [this]() {
-        
-        QMessageBox::information(this, "Logout", "Logged out successfully!");
-
-        
-        loginButton->setVisible(true);
-        createRoomButton->setVisible(false);
-        readRoomButton->setVisible(false);
-        updateRoomButton->setVisible(false);
-        deleteRoomButton->setVisible(false);
-        logoutButton->setVisible(false);
-    });
 }
 
 DesktopGUI::~DesktopGUI() {

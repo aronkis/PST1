@@ -10,7 +10,6 @@ private:
     std::string username;
     std::string email;
     std::string password;
-    bool logged_in;
     int role;
 
 public:
@@ -33,10 +32,6 @@ public:
     void SetPassword(const std::string& password);
     void SetLoggedIn(bool is_logged_in);
     void SetRole(int role);
-
-    // Login and Logout methods
-    void Login();
-    void Logout();
 };
 
 #endif // USER_H

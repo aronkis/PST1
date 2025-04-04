@@ -42,11 +42,9 @@ public:
 
 private:
     QWidget *centralWidget;
-    QTabWidget *tabWidget;
     QWidget *clientViewWidget;
     QWidget *userViewWidget;
     QVBoxLayout *layout;
-
     QLabel *label;
     
     // Buttons for UserView

@@ -38,13 +38,25 @@ void ClientPresenter::handleFilterRooms(double price, const std::string &locatio
 
 void ClientPresenter::populateRoomData() {
     std::vector<Room> rooms = rooms_table->ListRooms();
+    std::set<std::string> uniqueHotelNames;
+    std::set<bool> uniqueAvailability;
 
     for (const Room &room : rooms) {
-        client_gui->SetRoomAvailability(room.GetAvailability());
         client_gui->SetRoomPrice(room.GetPrice());
         client_gui->SetRoomLocation(room.GetLocation());
         client_gui->SetRoomPosition(room.GetPosition());
-        client_gui->SetHotelName(room.GetHotelName());
+        uniqueHotelNames.insert(room.GetHotelName());
+        uniqueAvailability.insert(room.GetAvailability());
+    }
+
+    // Populate the GUI with unique hotel names
+    for (const std::string &hotelName : uniqueHotelNames) {
+        client_gui->SetHotelName(hotelName);
+    }
+
+    // Populate the GUI with unique availability statuses
+    for (bool availability : uniqueAvailability) {
+        client_gui->SetRoomAvailability(availability);
     }
 }
 

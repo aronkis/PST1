@@ -3,7 +3,6 @@
 User::User() 
 {
     id = 0;
-    logged_in = false;
     role = 0;
 }
 
@@ -13,7 +12,6 @@ User::User(int id, const std::string& username, const std::string& email, const 
     this->username = username;
     this->email = email;
     this->password = password;
-    logged_in = false;
     role = 0;
 }
 
@@ -21,7 +19,6 @@ User::User(const std::string& username, const std::string& password)
 {
     this->username = username;
     this->password = password;
-    logged_in = false;
     role = 0;
 }
 
@@ -43,11 +40,6 @@ std::string User::GetEmail() const
 std::string User::GetPassword() const
 {
     return password;
-}
-
-bool User::GetLoggedIn() const
-{
-    return logged_in;
 }
 
 int User::GetRole() const
@@ -75,22 +67,7 @@ void User::SetPassword(const std::string& password)
     this->password = password;
 }
 
-void User::SetLoggedIn(bool is_logged_in)
-{
-    this->logged_in = is_logged_in;
-}
-
 void User::SetRole(int role)
 {
     this->role = role;
-}
-
-void User::Login()
-{
-    logged_in = true;
-}
-
-void User::Logout()
-{
-    logged_in = false;
 }

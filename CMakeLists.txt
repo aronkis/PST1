@@ -24,11 +24,11 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
 set(CLIENT_HEADERS
-    include/view/client/desktopgui.h
+    include/view/client/clientdesktop.h
 )
 
 set(CLIENT_SOURCES
-    src/view/desktopgui.cc
+    src/view/clientdesktop.cc
     src/model/client.cc
     src/model/room.cc
     src/model/user.cc

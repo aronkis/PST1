@@ -7,10 +7,6 @@
 
 class ClientTable
 {
-private:
-    Database* db;
-    std::string table_name;
-
 public:
     ClientTable(Database* database);
 
@@ -19,6 +15,11 @@ public:
     void UpdateClient(int client_id, const Client& client);
     void DeleteClient(int client_id);
     std::vector<Client> ListClients();
+
+private:
+    Database* db;
+    std::string table_name;
+
 };
 
 #endif // CLIENTTABLE_H

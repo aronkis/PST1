@@ -51,7 +51,7 @@ void Database::CloseConnection()
 }
 
 bool Database::ExecuteSQLCommand(const std::string& command) {
-    char* errMsg = nullptr;  // Error message pointer
+    char* errMsg = nullptr;  
     int result = sqlite3_exec(db, command.c_str(), nullptr, nullptr, &errMsg);
 
     if (result != SQLITE_OK) {

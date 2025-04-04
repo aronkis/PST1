@@ -6,8 +6,8 @@
 #include <vector>
 #include <functional>
 
-class Database {
-
+class Database 
+{
 public:
     Database() : db(nullptr) {}
     ~Database();
@@ -24,7 +24,6 @@ public:
 
 private:
     sqlite3* db;
-
 };
 
 #endif // DATABASE_H

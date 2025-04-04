@@ -7,10 +7,6 @@
 
 class UserTable
 {
-private:
-    Database* db;
-    std::string table_name;
-
 public:
     UserTable(Database* database);
 
@@ -20,6 +16,10 @@ public:
     bool DeleteUser(int user_id);
     std::vector<User> ListUsers();
     bool CheckCredentials(std::string username, std::string password);
+    
+private:
+    Database* db;
+    std::string table_name;
 
 };
 

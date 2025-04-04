@@ -1,5 +1,5 @@
-#ifndef DESKTOPGUI_H
-#define DESKTOPGUI_H
+#ifndef CLIENTDESKTOP_H
+#define CLIENTDESKTOP_H
 
 #include <QMainWindow>
 #include <QWidget>
@@ -8,8 +8,7 @@
 #include <QLabel>
 #include <QComboBox>
 #include <QListWidget>
-#include <QLineEdit> // Include QLineEdit
-#include <QString>
+#include <QLineEdit> 
 #include <vector>
 #include <string>
 #include "clientgui.h"
@@ -17,14 +16,14 @@
 #include "database.h"
 #include "clientpresenter.h"
 
-class DesktopGUI : public QMainWindow, public ClientGUI {
+class ClientDesktopGIO : public QMainWindow, public ClientGUI 
+{
     Q_OBJECT
 
 public:
-    explicit DesktopGUI(QWidget *parent = nullptr);
-    ~DesktopGUI();
+    explicit ClientDesktopGIO(QWidget *parent = nullptr);
+    ~ClientDesktopGIO();
 
-    // Implementation of ClientGUI interface
     bool GetRoomAvailability() override;
     void SetRoomAvailability(bool availability) override;
     double GetRoomPrice() override;
@@ -47,55 +46,40 @@ private:
     QVBoxLayout *layout;
     QLabel *label;
     
-    // Buttons for UserView
     QPushButton *loginButton;
     QPushButton *createRoomButton;
     QPushButton *readRoomButton;
     QPushButton *updateRoomButton;
     QPushButton *deleteRoomButton;
     QPushButton *logoutButton;
-
-    // Buttons
+    
     QPushButton *printAvailableButton;
     QPushButton *filterRoomsButton;
-    QPushButton *nextButton; // Button to navigate to the next result
-    QPushButton *prevButton; // Button to navigate to the previous result
-
-    // Dropdown boxes for room attributes
+    QPushButton *nextButton; 
+    QPushButton *prevButton; 
+    
     QComboBox *roomAvailabilityBox;
     QComboBox *roomPriceBox;
     QComboBox *roomLocationBox;
     QComboBox *roomPositionBox;
     QComboBox *hotelNameBox;
 
-    // Output fields
     QLineEdit *hotelNameField;
     QLineEdit *roomNumberField;
     QLineEdit *priceField;
     QLineEdit *locationField;
     QLineEdit *positionField;
-    QLineEdit *facilitiesField; // This will display facilities as a single line
+    QLineEdit *facilitiesField; 
 
     QListWidget *facilitiesListWidget;
 
     Database database;
     RoomTable roomTable;
 
-    // Member variables for ClientGUI properties
-    int roomId;
-    int roomNumber;
-    bool roomAvailability;
-    double roomPrice;
-    std::string hotelName;
-    std::string roomLocation;
-    std::string roomPosition;
-    std::vector<std::string> roomFacilities;
-
-    // For paging
     std::vector<Room> currentRooms;
     int currentPage;
 
-    ClientPresenter *presenter; // Add a ClientPresenter member
+    ClientPresenter *presenter; 
 
     void populateRoomData();
     void populateFacilities();
@@ -103,8 +87,8 @@ private:
 private slots:
     void onPrintAvailableRoomsClicked();
     void onFilterRoomsClicked();
-    void onNextButtonClicked(); // Slot for navigating to the next result
-    void onPrevButtonClicked(); // Slot for navigating to the previous result
+    void onNextButtonClicked(); 
+    void onPrevButtonClicked(); 
 };
 
 #endif // DESKTOPGUI_H

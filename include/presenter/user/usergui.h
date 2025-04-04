@@ -5,7 +5,8 @@
 #include <vector>
 #include "room.h"
 
-class UserGUI {
+class UserGUI 
+{
 public:
     virtual int GetRoomId() = 0;
     virtual void SetRoomId(int id) = 0;

@@ -5,7 +5,8 @@
 #include <vector>
 #include "room.h"
 
-class ClientGUI {
+class ClientGUI 
+{
 public:
     virtual bool GetRoomAvailability() = 0;
     virtual void SetRoomAvailability(bool availability) = 0;

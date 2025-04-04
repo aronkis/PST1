@@ -1,30 +1,25 @@
-#include "userdesktop.h"
 #include <QApplication>
 #include <QMessageBox>
-#include <QDebug>
-#include <QTextEdit>
 #include <QVBoxLayout>
 #include <QFileDialog>
 #include <QLabel>
-#include <iostream>
-#include <set>
-#include <QSpacerItem>
 #include <QLineEdit>
-#include <QComboBox>
-#include <QListWidget>
+#include "userdesktop.h"
 #include "userpresenter.h"
 
-int openFileDlg(std::string& fname) {
+int openFileDlg(std::string& fname) 
+{
     QString fileName = QFileDialog::getOpenFileName(
         nullptr, "Open File", "../", "*"
     );
 
-    if (!fileName.isEmpty()) {
+    if (!fileName.isEmpty()) 
+    {
         fname = fileName.toStdString();
-        return 1; // File selected successfully
+        return 1; 
     }
 
-    return 0; // No file selected
+    return 0; 
 }
 
 UserDesktopGUI::UserDesktopGUI(QWidget *parent)
@@ -43,12 +38,6 @@ UserDesktopGUI::UserDesktopGUI(QWidget *parent)
       deleteRoomButton(new QPushButton("Delete Room", this)),
       deleteButton(new QPushButton("Delete", this)),
       logoutButton(new QPushButton("Logout", this)),
-      roomPositionBox(new QComboBox(this)),
-      roomAvailabilityBox(new QComboBox(this)),
-      roomPriceBox(new QComboBox(this)),
-      roomLocationBox(new QComboBox(this)),
-      hotelNameBox(new QComboBox(this)),
-      facilitiesListWidget(new QListWidget(this)),
       hotelNameField(new QLineEdit(this)), 
       roomIdField(new QLineEdit(this)), 
       roomNumberField(new QLineEdit(this)), 
@@ -62,58 +51,42 @@ UserDesktopGUI::UserDesktopGUI(QWidget *parent)
       userTable(&database),
       user_presenter(new UserPresenter(this, &roomTable, &userTable)) 
 {
-
     std::string fileName;
-    // if (!openFileDlg(fileName)) {
-    //     QMessageBox::critical(this, "Database Error", "No database selected!");
-    //     exit(0);
-    //     return;
-    // }
-    if (!database.OpenConnection("/home/karon/Documents/Git/PST1/database/Hotels.db")) {
+    if (!openFileDlg(fileName)) 
+    {
+        QMessageBox::critical(this, "Database Error", "No database selected!");
+        exit(0);
+        return;
+    }
+    if (!database.OpenConnection("/home/karon/Documents/Git/PST1/database/Hotels.db")) 
+    {
         QMessageBox::critical(this, "Database Error", "Failed to open the database connection.");
         exit(0);
         return;
     }
 
-    setCentralWidget(centralWidget); // Set centralWidget directly
+    setCentralWidget(centralWidget);
     centralWidget->setLayout(layout);
 
     layout->addWidget(label, 0, Qt::AlignCenter | Qt::AlignHCenter);
 
-    // user_presenter->populateRoomData();
-    // user_presenter->populateFacilities();
-
-    hotelNameLabel = new QLabel("Hotel Name:", this);
-    roomNumberLabel = new QLabel("Room Number:", this);
-    roomAvailabilityLabel = new QLabel("Room Availability:", this);
-    priceLabel = new QLabel("Room Price:", this);
-    locationLabel = new QLabel("Room Location:", this);
-    positionLabel = new QLabel("Room Position:", this);
-    facilitiesLabel = new QLabel("Facilities:", this);
-
     outHotelNameLabel = new QLabel("Hotel Name:", this);
     outRoomIdLabel = new QLabel("Room Id:", this);
     outRoomNumberLabel = new QLabel("Room Number:", this);
-    outRoomAvailabilityLabel = new QLabel("Room Availability:", this);;
+    outRoomAvailabilityLabel = new QLabel("Room Availability:", this);
     outPriceLabel = new QLabel("Room Price:", this);
     outLocationLabel = new QLabel("Room Location:", this);
     outPositionLabel = new QLabel("Room Position:", this);
     outFacilitiesLabel = new QLabel("Facilities:", this);
 
-    layout->addWidget(hotelNameLabel);
-    layout->addWidget(hotelNameBox);
     layout->addWidget(outHotelNameLabel);
     layout->addWidget(hotelNameField);
-    hotelNameLabel->setVisible(false);
-    hotelNameBox->setVisible(false);
     outHotelNameLabel->setVisible(false);
     hotelNameField->setVisible(false);
     hotelNameField->setReadOnly(true);
 
-    layout->addWidget(roomNumberLabel);
     layout->addWidget(outRoomNumberLabel);
     layout->addWidget(roomNumberField);
-    roomNumberLabel->setVisible(false);
     outRoomNumberLabel->setVisible(false);
     roomNumberField->setVisible(false);
     roomNumberField->setReadOnly(true);
@@ -124,53 +97,32 @@ UserDesktopGUI::UserDesktopGUI(QWidget *parent)
     roomIdField->setVisible(false);
     roomIdField->setReadOnly(true);
 
-    layout->addWidget(roomAvailabilityLabel);
-    layout->addWidget(roomAvailabilityBox);
     layout->addWidget(outRoomAvailabilityLabel);
     layout->addWidget(roomAvailabilityField);
-    roomAvailabilityLabel->setVisible(false);
-    roomAvailabilityBox->setVisible(false);
     outRoomAvailabilityLabel->setVisible(false);
     roomAvailabilityField->setVisible(false);
     roomAvailabilityField->setReadOnly(true);
 
-    layout->addWidget(priceLabel);
-    layout->addWidget(roomPriceBox);
     layout->addWidget(outPriceLabel);
     layout->addWidget(priceField);
-    priceLabel->setVisible(false);
-    roomPriceBox->setVisible(false);
     outPriceLabel->setVisible(false);
     priceField->setVisible(false);
     priceField->setReadOnly(true);
 
-    layout->addWidget(locationLabel);
-    layout->addWidget(roomLocationBox);
     layout->addWidget(outLocationLabel);
     layout->addWidget(locationField);
-    locationLabel->setVisible(false);
-    roomLocationBox->setVisible(false);
     outLocationLabel->setVisible(false);
     locationField->setVisible(false);
     locationField->setReadOnly(true);
 
-
-    layout->addWidget(positionLabel);
-    layout->addWidget(roomPositionBox);
     layout->addWidget(outPositionLabel);
     layout->addWidget(positionField);
-    positionLabel->setVisible(false);
-    roomPositionBox->setVisible(false);
     outPositionLabel->setVisible(false);
     positionField->setVisible(false);
     positionField->setReadOnly(true);
  
-    layout->addWidget(facilitiesLabel);
-    layout->addWidget(facilitiesListWidget);
     layout->addWidget(outFacilitiesLabel);
     layout->addWidget(facilitiesField);
-    facilitiesLabel->setVisible(false);
-    facilitiesListWidget->setVisible(false);
     outFacilitiesLabel->setVisible(false);
     facilitiesField->setVisible(false);
     facilitiesField->setReadOnly(true);
@@ -210,7 +162,6 @@ UserDesktopGUI::UserDesktopGUI(QWidget *parent)
     updateButton->setVisible(false);
     deleteButton->setVisible(false);
 
-    // Connect signals and slots
     connect(loginButton, &QPushButton::clicked, this, &UserDesktopGUI::onLogInClicked);
     connect(logoutButton, &QPushButton::clicked, this, &UserDesktopGUI::onLogOutClicked);
     connect(readRoomButton, &QPushButton::clicked, this, &UserDesktopGUI::onReadroomClicked);
@@ -248,6 +199,7 @@ void UserDesktopGUI::findRoomButtonClicked()
 
 void UserDesktopGUI::homeButtonClicked()
 {
+    label->setText("Room Menu");
     loginButton->setVisible(false);
     usernameLabel->setVisible(false);
     usernameField->setVisible(false);
@@ -258,31 +210,18 @@ void UserDesktopGUI::homeButtonClicked()
     updateRoomButton->setVisible(true);
     deleteRoomButton->setVisible(true);
     logoutButton->setVisible(true);
-    hotelNameLabel->setVisible(false);
-    hotelNameBox->setVisible(false);
     outHotelNameLabel->setVisible(false);
     hotelNameField->setVisible(false);
-    roomNumberLabel->setVisible(false);
     outRoomNumberLabel->setVisible(false);
     roomNumberField->setVisible(false);
-    roomAvailabilityLabel->setVisible(false);
-    roomAvailabilityBox->setVisible(false);
     outRoomAvailabilityLabel->setVisible(false);
     roomAvailabilityField->setVisible(false);
-    priceLabel->setVisible(false);
-    roomPriceBox->setVisible(false);
     outPriceLabel->setVisible(false);
     priceField->setVisible(false);
-    locationLabel->setVisible(false);
-    roomLocationBox->setVisible(false);
     outLocationLabel->setVisible(false);
     locationField->setVisible(false);
-    positionLabel->setVisible(false);
-    roomPositionBox->setVisible(false);
     outPositionLabel->setVisible(false);
     positionField->setVisible(false);
-    facilitiesLabel->setVisible(false);
-    facilitiesListWidget->setVisible(false);
     outFacilitiesLabel->setVisible(false);
     facilitiesField->setVisible(false);
     homeButton->setVisible(false);
@@ -298,12 +237,13 @@ void UserDesktopGUI::homeButtonClicked()
 
 void UserDesktopGUI::onReadroomClicked()
 {
+    label->setText("Read Room");
     outHotelNameLabel->setVisible(true);
     hotelNameField->setVisible(true);
     hotelNameField->setReadOnly(false);
     hotelNameField->clear();
 
-    roomNumberLabel->setVisible(true);
+    outRoomNumberLabel->setVisible(true);
     roomNumberField->setVisible(true);
     roomNumberField->setReadOnly(false);
     roomNumberField->clear();
@@ -316,7 +256,6 @@ void UserDesktopGUI::onReadroomClicked()
     updateRoomButton->setVisible(false);
     deleteRoomButton->setVisible(false);
     logoutButton->setVisible(false);
-
 }
 
 void UserDesktopGUI::onUpdateButtonClicked()
@@ -327,6 +266,7 @@ void UserDesktopGUI::onUpdateButtonClicked()
 void UserDesktopGUI::onUpdateroomClicked()
 {
     onReadroomClicked();
+    label->setText("Update Room");
     hotelNameField->setReadOnly(false);
     roomNumberField->setReadOnly(false);
     roomIdField->setReadOnly(false);
@@ -347,10 +287,10 @@ void UserDesktopGUI::onDeleteClicked()
 void UserDesktopGUI::onDeleteRoomClicked()
 {
     onReadroomClicked();
+    label->setText("Delete Room");
     findRoomButton->setVisible(false);
     deleteButton->setVisible(true);
 }
-
 
 void UserDesktopGUI::onCreateClicked()
 {
@@ -359,12 +299,13 @@ void UserDesktopGUI::onCreateClicked()
 
 void UserDesktopGUI::onCreateRoomClicked()
 {
+    label->setText("Create Room");
     outHotelNameLabel->setVisible(true);
     hotelNameField->setVisible(true);
     hotelNameField->setReadOnly(false);
     hotelNameField->clear();
 
-    roomNumberLabel->setVisible(true);
+    outRoomNumberLabel->setVisible(true);
     roomNumberField->setVisible(true);
     roomNumberField->setReadOnly(false);
     roomNumberField->clear();
@@ -408,22 +349,22 @@ void UserDesktopGUI::onCreateRoomClicked()
     logoutButton->setVisible(false);
 }
 
-void UserDesktopGUI::onLogInClicked() {
+void UserDesktopGUI::onLogInClicked() 
+{
     
-    // std::string username = this->GetUsername();
-    // std::string password = this->GetUserPassword();
-    // if (username.empty() || password.empty()) {
-    //     QMessageBox::warning(this, "Login Error", "Please enter both username and password.");
-    //     return;
-    // }
-
-    // // Call the presenter to handle login  
-    // if (!user_presenter->HandleLogin(username, password)) {
-    //     QMessageBox::warning(this, "Login Error", "Invalid username or password.");
-    //     return;
-    // }
-    // If login is successful, show a message and update the UI
-    // QMessageBox::information(this, "Login", "Login successful!");
+    std::string username = this->GetUsername();
+    std::string password = this->GetUserPassword();
+    if (username.empty() || password.empty()) 
+    {
+        QMessageBox::warning(this, "Login Error", "Please enter both username and password.");
+        return;
+    }
+    
+    if (!user_presenter->HandleLogin(username, password)) 
+    {
+        QMessageBox::warning(this, "Login Error", "Invalid username or password.");
+        return;
+    }
         
     loginButton->setVisible(false);
     usernameLabel->setVisible(false);
@@ -435,13 +376,13 @@ void UserDesktopGUI::onLogInClicked() {
     updateRoomButton->setVisible(true);
     deleteRoomButton->setVisible(true);
     logoutButton->setVisible(true);
-
-     // Adjust the window size to fit the updated GUI
-     adjustSize();
+    label->setText("Room Menu");
+     
+    adjustSize();
 }
 
-void UserDesktopGUI::onLogOutClicked() {
-    QMessageBox::information(this, "Logout", "You have been logged out!");
+void UserDesktopGUI::onLogOutClicked() 
+{
 
     loginButton->setVisible(true);
     usernameLabel->setVisible(true);
@@ -457,80 +398,98 @@ void UserDesktopGUI::onLogOutClicked() {
     deleteRoomButton->setVisible(false);
     logoutButton->setVisible(false);
 
-     adjustSize();
+    adjustSize();
 }
 
-int UserDesktopGUI::GetRoomId() {
-    return roomNumberField->text().toInt(); // Assuming room ID is stored in roomNumberField
+int UserDesktopGUI::GetRoomId() 
+{
+    return roomIdField->text().toInt(); 
 }
 
-void UserDesktopGUI::SetRoomId(int id) {
-    roomIdField->setText(QString::number(id)); // Set the room ID in roomNumberField
+void UserDesktopGUI::SetRoomId(int id) 
+{
+    roomIdField->setText(QString::number(id)); 
 }
 
-int UserDesktopGUI::GetRoomNumber() {
-    return roomNumberField->text().toInt(); // Assuming room number is stored in roomNumberField
+int UserDesktopGUI::GetRoomNumber() 
+{
+    return roomNumberField->text().toInt(); 
 }
 
-void UserDesktopGUI::SetRoomNumber(int number) {
-    roomNumberField->setText(QString::number(number)); // Set the room number in roomNumberField
+void UserDesktopGUI::SetRoomNumber(int number) 
+{
+    roomNumberField->setText(QString::number(number)); 
 }
 
-std::string UserDesktopGUI::GetUsername() {
-    return usernameField->text().toStdString(); // Get the username from usernameField
+std::string UserDesktopGUI::GetUsername() 
+{
+    return usernameField->text().toStdString(); 
 }
 
-std::string UserDesktopGUI::GetUserPassword() {
-    return userPasswordField->text().toStdString(); // Get the password from userPasswordField
+std::string UserDesktopGUI::GetUserPassword() 
+{
+    return userPasswordField->text().toStdString(); 
 }
 
-bool UserDesktopGUI::GetRoomAvailability() {
+bool UserDesktopGUI::GetRoomAvailability() 
+{
     return roomAvailabilityField->text() == "Available";
 }
 
-void UserDesktopGUI::SetRoomAvailability(bool availability) {
+void UserDesktopGUI::SetRoomAvailability(bool availability)
+{
     roomAvailabilityField->setText(availability ? "Available" : "Not Available");
 }
 
-double UserDesktopGUI::GetRoomPrice() {
-    return priceField->text().toDouble(); // Keep as QLineEdit for numeric input
+double UserDesktopGUI::GetRoomPrice() 
+{
+    return priceField->text().toDouble(); 
 }
 
-void UserDesktopGUI::SetRoomPrice(double price) {
+void UserDesktopGUI::SetRoomPrice(double price) 
+{
     priceField->setText(QString::number(price));
 }
 
-std::string UserDesktopGUI::GetRoomLocation() {
+std::string UserDesktopGUI::GetRoomLocation() 
+{
     return locationField->text().toStdString();
 }
 
-void UserDesktopGUI::SetRoomLocation(const std::string &location) {
+void UserDesktopGUI::SetRoomLocation(const std::string &location) 
+{
     locationField->setText(QString::fromStdString(location));
 }
 
-std::string UserDesktopGUI::GetRoomPosition() {
+std::string UserDesktopGUI::GetRoomPosition() 
+{
     return positionField->text().toStdString();
 }
 
-void UserDesktopGUI::SetRoomPosition(const std::string &position) {
+void UserDesktopGUI::SetRoomPosition(const std::string &position) 
+{
     positionField->setText(QString::fromStdString(position));
 }
 
-std::vector<std::string> UserDesktopGUI::GetFacilities() {
+std::vector<std::string> UserDesktopGUI::GetFacilities() 
+{
     std::vector<std::string> facilities;
 
     QString facilitiesText = facilitiesField->text();
 
-    for (const QString& facility : facilitiesText.split(',')) {
-        facilities.push_back(facility.trimmed().toStdString()); // Trim spaces and convert to std::string
+    for (const QString& facility : facilitiesText.split(',')) 
+    {
+        facilities.push_back(facility.trimmed().toStdString()); 
     }
     
     return facilities;
 }
 
-void UserDesktopGUI::SetRoomFacilities(const std::vector<std::string> &facilities) {
+void UserDesktopGUI::SetRoomFacilities(const std::vector<std::string> &facilities) 
+{
     std::string facilitiesStr = facilities[0];
-    for (int i = 1; i < facilities.size(); i++) {
+    for (int i = 1; i < facilities.size(); i++) 
+    {
         facilitiesStr += ", " + facilities[i];
     }
     facilitiesField->setText(QString::fromStdString(facilitiesStr));
@@ -540,18 +499,18 @@ std::string UserDesktopGUI::GetHotelName() {
     return hotelNameField->text().toStdString();
 }
 
-void UserDesktopGUI::SetHotelName(const std::string &hotel_name) {
+void UserDesktopGUI::SetHotelName(const std::string &hotel_name) 
+{
     hotelNameField->setText(QString::fromStdString(hotel_name));
 }
 
-
-
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) 
+{
     QApplication app(argc, argv);
 
 
     UserDesktopGUI mainWindow(nullptr);
-    mainWindow.setWindowTitle("Desktop Client Application");
+    mainWindow.setWindowTitle("Desktop User Application");
     mainWindow.show();
 
     return app.exec();

@@ -6,21 +6,10 @@
 
 class Room
 {
-private:
-    int id;
-    int number;
-    std::string location;
-    float price;
-    bool availability;
-    std::string position;
-    std::vector<std::string> facilities; // List of facilities for the room
-    std::string hotel_name;
-
 public:
     Room(int id, const std::string& location, std::string position, int number, bool is_available, 
         double price, const std::vector<std::string>& facilities);
 
-    // Getters
     int GetId() const;
     int GetNumber() const;
     bool GetAvailability() const;
@@ -30,7 +19,6 @@ public:
     std::vector<std::string> GetFacilities() const;
     std::string GetHotelName() const;
 
-    // Setters
     void SetId(int id);
     void SetNumber(int number);
     void SetLocation(const std::string& location);
@@ -40,8 +28,18 @@ public:
     void SetFacilities(const std::vector<std::string>& facilities);
     void SetHotelName(const std::string& hotel_name);
 
-    // Matches filter criteria
     bool MatchesFilter(const std::string& location, bool availability, double max_price, const std::vector<std::string>& required_facilities) const;
+
+private:
+    int id;
+    int number;
+    std::string location;
+    float price;
+    bool availability;
+    std::string position;
+    std::vector<std::string> facilities; 
+    std::string hotel_name;
+
 };
 
 #endif // ROOM_H

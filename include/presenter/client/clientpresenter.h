@@ -7,18 +7,19 @@
 #include "roomtable.h"
 #include "clientgui.h"
 
-class ClientPresenter {
+class ClientPresenter 
+{
 public:
     ClientPresenter(ClientGUI* gui, RoomTable* table);
 
-    void populateRoomData();       // Populate room data
-    void populateFacilities();    // Populate facilities
-    void handlePrintAvailableRooms(const std::string &hotelName); // Declare this method
+    void populateRoomData();       
+    void populateFacilities();    
+    void handlePrintAvailableRooms(const std::string &hotelName); 
     void handleFilterRooms(double price, const std::string &location, const std::string &position,
-                           bool availability, const std::vector<std::string> &facilities); // Declare this method
+                           bool availability, const std::vector<std::string> &facilities); 
 
 private:
-    ClientGUI* client_gui;  // Accept ClientGUI pointer, which can point to ClientView
+    ClientGUI* client_gui; 
     RoomTable* rooms_table;
 };
 

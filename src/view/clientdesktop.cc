@@ -1,30 +1,24 @@
-#include "desktopgui.h"
 #include <QApplication>
 #include <QMessageBox>
-#include <QDebug>
-#include <QTextEdit>
-#include <QVBoxLayout>
 #include <QFileDialog>
-#include <QLabel>
-#include <set>
-#include <iostream>
-#include "clientpresenter.h"
+#include "clientdesktop.h"
 
-
-int openFileDlg(std::string& fname) {
+int openFileDlg(std::string& fname) 
+{
     QString fileName = QFileDialog::getOpenFileName(
         nullptr, "Open File", "../", "*"
     );
 
-    if (!fileName.isEmpty()) {
+    if (!fileName.isEmpty()) 
+    {
         fname = fileName.toStdString();
-        return 1; // File selected successfully
+        return 1; 
     }
 
-    return 0; // No file selected
+    return 0;
 }
 
-DesktopGUI::DesktopGUI(QWidget *parent)
+ClientDesktopGIO::ClientDesktopGIO(QWidget *parent)
     : QMainWindow(parent),
       centralWidget(new QWidget(this)),
       layout(new QVBoxLayout),
@@ -51,19 +45,21 @@ DesktopGUI::DesktopGUI(QWidget *parent)
       currentPage(0)
 {
     std::string fileName;
-    if (!openFileDlg(fileName)) {
+    if (!openFileDlg(fileName)) 
+    {
         QMessageBox::critical(this, "Database Error", "No database selected!");
         exit(0);
         return;
     }
 
-    if (!database.OpenConnection(fileName)) {
+    if (!database.OpenConnection(fileName)) 
+    {
         QMessageBox::critical(this, "Database Error", "Failed to open the database connection.");
         exit(0);
         return;
     }
 
-    setCentralWidget(centralWidget); // Set centralWidget directly
+    setCentralWidget(centralWidget);
     centralWidget->setLayout(layout);
 
     QSpacerItem *topSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -124,88 +120,108 @@ DesktopGUI::DesktopGUI(QWidget *parent)
     layout->addWidget(prevButton);
     layout->addWidget(nextButton);
 
-    connect(printAvailableButton, &QPushButton::clicked, this, &DesktopGUI::onPrintAvailableRoomsClicked);
-    connect(filterRoomsButton, &QPushButton::clicked, this, &DesktopGUI::onFilterRoomsClicked);
-    connect(nextButton, &QPushButton::clicked, this, &DesktopGUI::onNextButtonClicked);
-    connect(prevButton, &QPushButton::clicked, this, &DesktopGUI::onPrevButtonClicked);
+    connect(printAvailableButton, &QPushButton::clicked, this, &ClientDesktopGIO::onPrintAvailableRoomsClicked);
+    connect(filterRoomsButton, &QPushButton::clicked, this, &ClientDesktopGIO::onFilterRoomsClicked);
+    connect(nextButton, &QPushButton::clicked, this, &ClientDesktopGIO::onNextButtonClicked);
+    connect(prevButton, &QPushButton::clicked, this, &ClientDesktopGIO::onPrevButtonClicked);
 }
 
-DesktopGUI::~DesktopGUI() {
+ClientDesktopGIO::~ClientDesktopGIO() 
+{
     database.CloseConnection();
 }
 
-bool DesktopGUI::GetRoomAvailability() {
+bool ClientDesktopGIO::GetRoomAvailability() 
+{
     return roomAvailabilityBox->currentText() == "Available";
 }
 
-void DesktopGUI::SetRoomAvailability(bool availability) {
+void ClientDesktopGIO::SetRoomAvailability(bool availability) 
+{
     roomAvailabilityBox->addItem(availability ? "Available" : "Not Available");
 }
 
-double DesktopGUI::GetRoomPrice() {
+double ClientDesktopGIO::GetRoomPrice() 
+{
     return roomPriceBox->currentText().toDouble();
 }
 
-void DesktopGUI::SetRoomPrice(double price) {
+void ClientDesktopGIO::SetRoomPrice(double price) 
+{
     roomPriceBox->addItem(QString::number(price));
 }
 
-std::string DesktopGUI::GetRoomLocation() {
+std::string ClientDesktopGIO::GetRoomLocation() 
+{
     return roomLocationBox->currentText().toStdString();
 }
 
-void DesktopGUI::SetRoomLocation(const std::string &location) {
+void ClientDesktopGIO::SetRoomLocation(const std::string &location) 
+{
     roomLocationBox->addItem(QString::fromStdString(location));
 }
 
-std::string DesktopGUI::GetRoomPosition() {
+std::string ClientDesktopGIO::GetRoomPosition() 
+{
     return roomPositionBox->currentText().toStdString();
 }
 
-void DesktopGUI::SetRoomPosition(const std::string &position) {
+void ClientDesktopGIO::SetRoomPosition(const std::string &position) 
+{
     roomPositionBox->addItem(QString::fromStdString(position));
 }
 
-std::vector<std::string> DesktopGUI::GetFacilities() {
+std::vector<std::string> ClientDesktopGIO::GetFacilities() 
+{
     std::vector<std::string> selectedFacilities;
-    for (int i = 0; i < facilitiesListWidget->count(); ++i) {
+    for (int i = 0; i < facilitiesListWidget->count(); ++i) 
+    {
         QListWidgetItem *item = facilitiesListWidget->item(i);
-        if (item->checkState() == Qt::Checked) {
+        if (item->checkState() == Qt::Checked) 
+        {
             selectedFacilities.push_back(item->text().toStdString());
         }
     }
     return selectedFacilities;
 }
 
-void DesktopGUI::SetRoomFacilities(const std::vector<std::string> &facilities) {
-    for (const std::string &facility : facilities) {
+void ClientDesktopGIO::SetRoomFacilities(const std::vector<std::string> &facilities) 
+{
+    for (const std::string &facility : facilities) 
+    {
         QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(facility), facilitiesListWidget);
         item->setCheckState(Qt::Unchecked);
     }
 }
 
-std::string DesktopGUI::GetHotelName() {
+std::string ClientDesktopGIO::GetHotelName() 
+{
     return hotelNameBox->currentText().toStdString();
 }
 
-void DesktopGUI::SetHotelName(const std::string &hotel_name) {
+void ClientDesktopGIO::SetHotelName(const std::string &hotel_name) 
+{
     hotelNameBox->addItem(QString::fromStdString(hotel_name));
 }
 
-void DesktopGUI::onPrintAvailableRoomsClicked() {
+void ClientDesktopGIO::onPrintAvailableRoomsClicked() 
+{
     presenter->handlePrintAvailableRooms(hotelNameBox->currentText().toStdString());
 }
 
-void DesktopGUI::onFilterRoomsClicked() {
+void ClientDesktopGIO::onFilterRoomsClicked() 
+{
     double price = roomPriceBox->currentText().toDouble();
     std::string location = roomLocationBox->currentText().toStdString();
     std::string position = roomPositionBox->currentText().toStdString();
     bool availability = (roomAvailabilityBox->currentText() == "Available");
 
     std::vector<std::string> selectedFacilities;
-    for (int i = 0; i < facilitiesListWidget->count(); ++i) {
+    for (int i = 0; i < facilitiesListWidget->count(); ++i)
+     {
         QListWidgetItem *item = facilitiesListWidget->item(i);
-        if (item->checkState() == Qt::Checked) {
+        if (item->checkState() == Qt::Checked) 
+        {
             selectedFacilities.push_back(item->text().toStdString());
         }
     }
@@ -213,25 +229,31 @@ void DesktopGUI::onFilterRoomsClicked() {
     presenter->handleFilterRooms(price, location, position, availability, selectedFacilities);
 }
 
-void DesktopGUI::onNextButtonClicked() {
-    if (currentPage < currentRooms.size() - 1) {
+void ClientDesktopGIO::onNextButtonClicked() 
+{
+    if (currentPage < currentRooms.size() - 1) 
+    {
         currentPage++;
         displayRoomDetails(currentPage);
     }
 }
 
-void DesktopGUI::onPrevButtonClicked() {
-    if (currentPage > 0) {
+void ClientDesktopGIO::onPrevButtonClicked() 
+{
+    if (currentPage > 0) 
+    {
         currentPage--;
         displayRoomDetails(currentPage);
     }
 }
 
-void DesktopGUI::setCurrentRooms(const std::vector<Room> &rooms) {
+void ClientDesktopGIO::setCurrentRooms(const std::vector<Room> &rooms) 
+{
     currentRooms = rooms;
 }
 
-void DesktopGUI::displayRoomDetails(int index) {
+void ClientDesktopGIO::displayRoomDetails(int index) 
+{
     if (index < 0 || index >= currentRooms.size())
     {
         hotelNameField->setText("N/A");
@@ -253,7 +275,8 @@ void DesktopGUI::displayRoomDetails(int index) {
     std::vector<std::string> facilities = room.GetFacilities();
     QString facilitiesText = QString::fromStdString(
         std::accumulate(facilities.begin(), facilities.end(), std::string(),
-                        [](const std::string &a, const std::string &b) {
+                        [](const std::string &a, const std::string &b) 
+                        {
                             return a.empty() ? b : a + ", " + b;
                         }));
     facilitiesField->setText(facilitiesText);
@@ -264,7 +287,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
 
-    DesktopGUI mainWindow(nullptr);
+    ClientDesktopGIO mainWindow(nullptr);
     mainWindow.setWindowTitle("Desktop Client Application");
     mainWindow.resize(400, 500);
     mainWindow.show();

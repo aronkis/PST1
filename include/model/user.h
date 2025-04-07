@@ -14,14 +14,12 @@ public:
     std::string GetUsername() const;
     std::string GetEmail() const;
     std::string GetPassword() const;
-    bool GetLoggedIn() const;
     int GetRole() const;
 
     void SetId(int id);
     void SetUsername(const std::string& username);
     void SetEmail(const std::string& email);
     void SetPassword(const std::string& password);
-    void SetLoggedIn(bool is_logged_in);
     void SetRole(int role);
 
 private:

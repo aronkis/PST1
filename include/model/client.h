@@ -23,7 +23,6 @@ private:
     std::string name;
     std::string email;
     std::string phone_number;
-
 };
 
 #endif // CLIENT_H

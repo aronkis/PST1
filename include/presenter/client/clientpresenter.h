@@ -14,7 +14,7 @@ public:
 
     void populateRoomData();       
     void populateFacilities();    
-    void handlePrintAvailableRooms(const std::string &hotelName); 
+    void handlePrintAvailableRooms(const std::string &hotel_name); 
     void handleFilterRooms(double price, const std::string &location, const std::string &position,
                            bool availability, const std::vector<std::string> &facilities); 
 

@@ -16,13 +16,13 @@
 #include "database.h"
 #include "clientpresenter.h"
 
-class ClientDesktopGIO : public QMainWindow, public ClientGUI 
+class ClientDesktopGUI : public QMainWindow, public ClientGUI 
 {
     Q_OBJECT
 
 public:
-    explicit ClientDesktopGIO(QWidget *parent = nullptr);
-    ~ClientDesktopGIO();
+    explicit ClientDesktopGUI(QWidget *parent = nullptr);
+    ~ClientDesktopGUI();
 
     bool GetRoomAvailability() override;
     void SetRoomAvailability(bool availability) override;

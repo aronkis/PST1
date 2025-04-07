@@ -18,7 +18,7 @@ int openFileDlg(std::string& fname)
     return 0;
 }
 
-ClientDesktopGIO::ClientDesktopGIO(QWidget *parent)
+ClientDesktopGUI::ClientDesktopGUI(QWidget *parent)
     : QMainWindow(parent),
       centralWidget(new QWidget(this)),
       layout(new QVBoxLayout),
@@ -120,58 +120,58 @@ ClientDesktopGIO::ClientDesktopGIO(QWidget *parent)
     layout->addWidget(prevButton);
     layout->addWidget(nextButton);
 
-    connect(printAvailableButton, &QPushButton::clicked, this, &ClientDesktopGIO::onPrintAvailableRoomsClicked);
-    connect(filterRoomsButton, &QPushButton::clicked, this, &ClientDesktopGIO::onFilterRoomsClicked);
-    connect(nextButton, &QPushButton::clicked, this, &ClientDesktopGIO::onNextButtonClicked);
-    connect(prevButton, &QPushButton::clicked, this, &ClientDesktopGIO::onPrevButtonClicked);
+    connect(printAvailableButton, &QPushButton::clicked, this, &ClientDesktopGUI::onPrintAvailableRoomsClicked);
+    connect(filterRoomsButton, &QPushButton::clicked, this, &ClientDesktopGUI::onFilterRoomsClicked);
+    connect(nextButton, &QPushButton::clicked, this, &ClientDesktopGUI::onNextButtonClicked);
+    connect(prevButton, &QPushButton::clicked, this, &ClientDesktopGUI::onPrevButtonClicked);
 }
 
-ClientDesktopGIO::~ClientDesktopGIO() 
+ClientDesktopGUI::~ClientDesktopGUI() 
 {
     database.CloseConnection();
 }
 
-bool ClientDesktopGIO::GetRoomAvailability() 
+bool ClientDesktopGUI::GetRoomAvailability() 
 {
     return roomAvailabilityBox->currentText() == "Available";
 }
 
-void ClientDesktopGIO::SetRoomAvailability(bool availability) 
+void ClientDesktopGUI::SetRoomAvailability(bool availability) 
 {
     roomAvailabilityBox->addItem(availability ? "Available" : "Not Available");
 }
 
-double ClientDesktopGIO::GetRoomPrice() 
+double ClientDesktopGUI::GetRoomPrice() 
 {
     return roomPriceBox->currentText().toDouble();
 }
 
-void ClientDesktopGIO::SetRoomPrice(double price) 
+void ClientDesktopGUI::SetRoomPrice(double price) 
 {
     roomPriceBox->addItem(QString::number(price));
 }
 
-std::string ClientDesktopGIO::GetRoomLocation() 
+std::string ClientDesktopGUI::GetRoomLocation() 
 {
     return roomLocationBox->currentText().toStdString();
 }
 
-void ClientDesktopGIO::SetRoomLocation(const std::string &location) 
+void ClientDesktopGUI::SetRoomLocation(const std::string &location) 
 {
     roomLocationBox->addItem(QString::fromStdString(location));
 }
 
-std::string ClientDesktopGIO::GetRoomPosition() 
+std::string ClientDesktopGUI::GetRoomPosition() 
 {
     return roomPositionBox->currentText().toStdString();
 }
 
-void ClientDesktopGIO::SetRoomPosition(const std::string &position) 
+void ClientDesktopGUI::SetRoomPosition(const std::string &position) 
 {
     roomPositionBox->addItem(QString::fromStdString(position));
 }
 
-std::vector<std::string> ClientDesktopGIO::GetFacilities() 
+std::vector<std::string> ClientDesktopGUI::GetFacilities() 
 {
     std::vector<std::string> selectedFacilities;
     for (int i = 0; i < facilitiesListWidget->count(); ++i) 
@@ -185,7 +185,7 @@ std::vector<std::string> ClientDesktopGIO::GetFacilities()
     return selectedFacilities;
 }
 
-void ClientDesktopGIO::SetRoomFacilities(const std::vector<std::string> &facilities) 
+void ClientDesktopGUI::SetRoomFacilities(const std::vector<std::string> &facilities) 
 {
     for (const std::string &facility : facilities) 
     {
@@ -194,22 +194,22 @@ void ClientDesktopGIO::SetRoomFacilities(const std::vector<std::string> &facilit
     }
 }
 
-std::string ClientDesktopGIO::GetHotelName() 
+std::string ClientDesktopGUI::GetHotelName() 
 {
     return hotelNameBox->currentText().toStdString();
 }
 
-void ClientDesktopGIO::SetHotelName(const std::string &hotel_name) 
+void ClientDesktopGUI::SetHotelName(const std::string &hotel_name) 
 {
     hotelNameBox->addItem(QString::fromStdString(hotel_name));
 }
 
-void ClientDesktopGIO::onPrintAvailableRoomsClicked() 
+void ClientDesktopGUI::onPrintAvailableRoomsClicked() 
 {
     presenter->handlePrintAvailableRooms(hotelNameBox->currentText().toStdString());
 }
 
-void ClientDesktopGIO::onFilterRoomsClicked() 
+void ClientDesktopGUI::onFilterRoomsClicked() 
 {
     double price = roomPriceBox->currentText().toDouble();
     std::string location = roomLocationBox->currentText().toStdString();
@@ -229,7 +229,7 @@ void ClientDesktopGIO::onFilterRoomsClicked()
     presenter->handleFilterRooms(price, location, position, availability, selectedFacilities);
 }
 
-void ClientDesktopGIO::onNextButtonClicked() 
+void ClientDesktopGUI::onNextButtonClicked() 
 {
     if (currentPage < currentRooms.size() - 1) 
     {
@@ -238,7 +238,7 @@ void ClientDesktopGIO::onNextButtonClicked()
     }
 }
 
-void ClientDesktopGIO::onPrevButtonClicked() 
+void ClientDesktopGUI::onPrevButtonClicked() 
 {
     if (currentPage > 0) 
     {
@@ -247,12 +247,12 @@ void ClientDesktopGIO::onPrevButtonClicked()
     }
 }
 
-void ClientDesktopGIO::setCurrentRooms(const std::vector<Room> &rooms) 
+void ClientDesktopGUI::setCurrentRooms(const std::vector<Room> &rooms) 
 {
     currentRooms = rooms;
 }
 
-void ClientDesktopGIO::displayRoomDetails(int index) 
+void ClientDesktopGUI::displayRoomDetails(int index) 
 {
     if (index < 0 || index >= currentRooms.size())
     {
@@ -287,7 +287,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
 
-    ClientDesktopGIO mainWindow(nullptr);
+    ClientDesktopGUI mainWindow(nullptr);
     mainWindow.setWindowTitle("Desktop Client Application");
     mainWindow.resize(400, 500);
     mainWindow.show();

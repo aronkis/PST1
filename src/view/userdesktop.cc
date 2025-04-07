@@ -58,7 +58,7 @@ UserDesktopGUI::UserDesktopGUI(QWidget *parent)
         exit(0);
         return;
     }
-    if (!database.OpenConnection("/home/karon/Documents/Git/PST1/database/Hotels.db")) 
+    if (!database.OpenConnection(fileName)) 
     {
         QMessageBox::critical(this, "Database Error", "Failed to open the database connection.");
         exit(0);
@@ -507,7 +507,6 @@ void UserDesktopGUI::SetHotelName(const std::string &hotel_name)
 int main(int argc, char *argv[]) 
 {
     QApplication app(argc, argv);
-
 
     UserDesktopGUI mainWindow(nullptr);
     mainWindow.setWindowTitle("Desktop User Application");

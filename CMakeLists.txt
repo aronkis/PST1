@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 # Find required packages
 find_package(SQLite3 REQUIRED)
-find_package(Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 # Include directories
 include_directories(${SQLite3_INCLUDE_DIRS})
@@ -39,10 +39,10 @@ set(CLIENT_SOURCES
     src/presenter/client/clientpresenter.cc
 )
 
-add_executable(ClientGUI ${CLIENT_SOURCES} ${CLIENT_HEADERS})
+add_executable(ClientView ${CLIENT_SOURCES} ${CLIENT_HEADERS})
 
-target_link_libraries(ClientGUI ${SQLite3_LIBRARIES})
-target_link_libraries(ClientGUI Qt5::Widgets)
+target_link_libraries(ClientView ${SQLite3_LIBRARIES})
+target_link_libraries(ClientView Qt6::Widgets)
 
 set(User_HEADERS
     include/view/user/userdesktop.h
@@ -61,7 +61,7 @@ set(User_SOURCES
     src/presenter/user/userpresenter.cc
 )
 
-add_executable(UserGUI ${User_SOURCES} ${User_HEADERS})
+add_executable(UserView ${User_SOURCES} ${User_HEADERS})
 
-target_link_libraries(UserGUI ${SQLite3_LIBRARIES})
-target_link_libraries(UserGUI Qt5::Widgets)
+target_link_libraries(UserView ${SQLite3_LIBRARIES})
+target_link_libraries(UserView Qt6::Widgets)

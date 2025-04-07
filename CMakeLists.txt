@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 # Find required packages
 find_package(SQLite3 REQUIRED)
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt5 REQUIRED COMPONENTS Widgets)
 
 # Include directories
 include_directories(${SQLite3_INCLUDE_DIRS})
@@ -23,26 +23,26 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CLIENT_HEADERS
-    include/view/client/clientdesktop.h
-)
+# set(CLIENT_HEADERS
+#     include/view/client/clientdesktop.h
+# )
 
-set(CLIENT_SOURCES
-    src/view/clientdesktop.cc
-    src/model/client.cc
-    src/model/room.cc
-    src/model/user.cc
-    src/model/database/database.cc
-    src/model/database/tables/clienttable.cc
-    src/model/database/tables/roomtable.cc
-    src/model/database/tables/usertable.cc
-    src/presenter/client/clientpresenter.cc
-)
+# set(CLIENT_SOURCES
+#     src/view/clientdesktop.cc
+#     src/model/client.cc
+#     src/model/room.cc
+#     src/model/user.cc
+#     src/model/database/database.cc
+#     src/model/database/tables/clienttable.cc
+#     src/model/database/tables/roomtable.cc
+#     src/model/database/tables/usertable.cc
+#     src/presenter/client/clientpresenter.cc
+# )
 
-add_executable(ClientView ${CLIENT_SOURCES} ${CLIENT_HEADERS})
+# add_executable(ClientView ${CLIENT_SOURCES} ${CLIENT_HEADERS})
 
-target_link_libraries(ClientView ${SQLite3_LIBRARIES})
-target_link_libraries(ClientView Qt6::Widgets)
+# target_link_libraries(ClientView ${SQLite3_LIBRARIES})
+# target_link_libraries(ClientView Qt5::Widgets)
 
 set(User_HEADERS
     include/view/user/userdesktop.h
@@ -50,18 +50,15 @@ set(User_HEADERS
 
 set(User_SOURCES
     src/view/userdesktop.cc
-    src/model/client.cc
     src/model/room.cc
     src/model/user.cc
     src/model/database/database.cc
-    src/model/database/tables/clienttable.cc
     src/model/database/tables/roomtable.cc
     src/model/database/tables/usertable.cc
-    src/presenter/client/clientpresenter.cc
     src/presenter/user/userpresenter.cc
 )
 
 add_executable(UserView ${User_SOURCES} ${User_HEADERS})
 
 target_link_libraries(UserView ${SQLite3_LIBRARIES})
-target_link_libraries(UserView Qt6::Widgets)
+target_link_libraries(UserView Qt5::Widgets)

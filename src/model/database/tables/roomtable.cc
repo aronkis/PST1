@@ -1,11 +1,12 @@
-#include "roomtable.h"
-#include "room.h"
 #include <iostream>
 #include <sqlite3.h>
 #include <sstream> 
 #include <vector>
 #include <string>
 #include <algorithm> 
+
+#include "roomtable.h"
+#include "room.h"
 
 std::string trim(const std::string &str) 
 {
@@ -14,7 +15,7 @@ std::string trim(const std::string &str)
     return (start == std::string::npos || end == std::string::npos) ? "" : str.substr(start, end - start + 1);
 }
 
-std::vector<std::string> splitString(const std::string &str, char delimiter) 
+std::vector<std::string> RoomTable::splitString(const std::string &str, char delimiter) 
 {
     std::vector<std::string> tokens;
     std::stringstream ss(str);

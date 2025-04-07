@@ -7,6 +7,8 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QLineEdit> 
+#include <QComboBox>
+#include <QListWidget>
 #include <vector>
 #include <string>
 #include "usergui.h"
@@ -21,25 +23,37 @@ class UserDesktopGUI : public QMainWindow, public UserGUI
 public:
     explicit UserDesktopGUI(QWidget *parent = nullptr);
     ~UserDesktopGUI();
-
     int GetRoomId() override;
     void SetRoomId(int id) override;
     int GetRoomNumber() override;
     void SetRoomNumber(int number) override;
-    bool GetRoomAvailability() override;
-    void SetRoomAvailability(bool availability) override;
+    std::string GetRoomAvailability() override;
+    void SetRoomAvailability(std::string availability) override;
     double GetRoomPrice() override;
     void SetRoomPrice(double price) override;
     std::string GetRoomLocation() override;
     void SetRoomLocation(const std::string &location) override;
     std::string GetRoomPosition()  override;
     void SetRoomPosition(const std::string &position) override;
-    std::vector<std::string> GetFacilities()  override;
-    void SetRoomFacilities(const std::vector<std::string> &facilities) override;
+    std::string GetFacilities()  override;
+    void SetRoomFacilities(const std::string &facilities) override;
     std::string GetHotelName() override;
     void SetHotelName(const std::string &hotel_name) override;
     std::string GetUsername() override;
     std::string GetUserPassword() override;
+    std::string GetHotelNameBox() override;
+    void SetHotelNameBox(const std::string &hotel_name) override;
+    void SetRoomAvailabilityBox(std::string availability) override;
+    void SetRoomPriceBox(double price) override;
+    void SetRoomLocationBox(const std::string &location) override;
+    void SetRoomPositionBox(const std::string &position) override;
+    void SetRoomFacilitiesBox(const std::string &facilities) override;
+    std::string GetRoomAvailabilityBox() override;
+    double GetRoomPriceBox() override;
+    std::string GetRoomLocationBox() override;
+    std::string GetRoomPositionBox() override;
+    std::string GetFacilitiesBox() override;
+    void SetLoggedIn(bool logged_in) override;
 
 private:
     QPushButton *loginButton;
@@ -53,6 +67,20 @@ private:
     QPushButton *deleteRoomButton;
     QPushButton *deleteButton;
     QPushButton *logoutButton;
+
+    QPushButton *nextButton;
+    QPushButton *prevButton;
+    QPushButton *availableRoomsButton;
+    QPushButton *showAvailableButton;
+    QPushButton *filterRoomsButton;
+    QPushButton *showFilterRoomsButton;
+
+    QComboBox *hotelNameBox;
+    QComboBox *roomAvailabilityBox;
+    QComboBox *roomPriceBox;
+    QComboBox *roomLocationBox;
+    QComboBox *roomPositionBox;
+    QListWidget *facilitiesListWidget;
     
     QWidget *centralWidget;
     QVBoxLayout *layout;
@@ -81,10 +109,18 @@ private:
     QLabel *usernameLabel;
     QLabel *userPasswordLabel;
 
+    QLabel *roomAvailabilityBoxLabel;
+    QLabel *roomPriceBoxLabel;
+    QLabel *roomLocationBoxLabel;
+    QLabel *roomPositionBoxLabel;
+    QLabel *hotelNameBoxLabel;
+    QLabel *facilitiesListWidgetLabel;
+
     UserPresenter *user_presenter; 
     Database database;
     RoomTable roomTable;
     UserTable userTable;
+    bool is_logged_in = false;
 
 private slots:
     void onLogInClicked();
@@ -98,6 +134,13 @@ private slots:
     void onUpdateButtonClicked();
     void onDeleteRoomClicked();
     void onDeleteClicked();
+    void onAvailableRoomsButtonClicked();
+    void onShowAvailableButtonClicked();
+    void onFilterRoomsButtonClicked(); 
+    void onShowFilterRoomsButtonClicked();
+    void onNextButtonClicked();
+    void onPrevButtonClicked();
+
 };
 
 #endif // USERGUI_H

@@ -64,26 +64,27 @@ UserDesktopGUI::UserDesktopGUI(QWidget *parent)
       userTable(&database),
       user_presenter(new UserPresenter(this, &roomTable, &userTable)) 
 {
-    // std::string fileName;
-    // if (!openFileDlg(fileName)) 
-    // {
-    //     QMessageBox::critical(this, "Database Error", "No database selected!");
-    //     exit(0);
-    //     return;
-    // }
-    if (!database.OpenConnection("/home/karon/Documents/Git/PST1/database/Hotels.db")) 
+    std::string fileName;
+    if (!openFileDlg(fileName)) 
+    {
+        QMessageBox::critical(this, "Database Error", "No database selected!");
+        exit(0);
+        return;
+    }
+
+    if (!database.OpenConnection(fileName)) 
     {
         QMessageBox::critical(this, "Database Error", "Failed to open the database connection.");
         exit(0);
         return;
     }
-    adjustSize();
-
+    
     user_presenter->populateRoomData();
     user_presenter->populateFacilities();
-
+    
     setCentralWidget(centralWidget);
     centralWidget->setLayout(layout);
+    this->adjustSize();
 
     layout->addWidget(label, 0, Qt::AlignCenter | Qt::AlignHCenter);
 
@@ -141,12 +142,14 @@ UserDesktopGUI::UserDesktopGUI(QWidget *parent)
 
     layout->addWidget(outRoomNumberLabel);
     layout->addWidget(roomNumberField);
+    roomNumberField->setValidator(new QIntValidator(0, 999999, this));
     outRoomNumberLabel->setVisible(false);
     roomNumberField->setVisible(false);
     roomNumberField->setReadOnly(true);
 
     layout->addWidget(outRoomIdLabel);
     layout->addWidget(roomIdField);
+    roomIdField->setValidator(new QIntValidator(0, 999999, this));
     outRoomIdLabel->setVisible(false);
     roomIdField->setVisible(false);
     roomIdField->setReadOnly(true);
@@ -159,6 +162,7 @@ UserDesktopGUI::UserDesktopGUI(QWidget *parent)
 
     layout->addWidget(outPriceLabel);
     layout->addWidget(priceField);
+    priceField->setValidator(new QDoubleValidator(0, 99999.99, 2, this));
     outPriceLabel->setVisible(false);
     priceField->setVisible(false);
     priceField->setReadOnly(true);
@@ -264,7 +268,8 @@ void UserDesktopGUI::onPrevButtonClicked()
 
 void UserDesktopGUI::onShowFilterRoomsButtonClicked()
 {
-    adjustSize();
+    this->adjustSize();
+
     outRoomIdLabel->setVisible(true);
     roomIdField->setVisible(true);
     outRoomAvailabilityLabel->setVisible(true);
@@ -286,7 +291,8 @@ void UserDesktopGUI::onShowFilterRoomsButtonClicked()
 
 void UserDesktopGUI::onFilterRoomsButtonClicked()
 {
-    adjustSize();
+    this->adjustSize();
+
     roomAvailabilityBoxLabel->setVisible(true);
     roomAvailabilityBox->setVisible(true);
     roomPriceBoxLabel->setVisible(true);
@@ -306,12 +312,11 @@ void UserDesktopGUI::onFilterRoomsButtonClicked()
     logoutButton->setVisible(false);
     availableRoomsButton->setVisible(false);
     filterRoomsButton->setVisible(false);
-
 }
 
 void UserDesktopGUI::onShowAvailableButtonClicked()
 {
-    adjustSize();
+    this->adjustSize();
 
     outRoomIdLabel->setVisible(true);
     roomIdField->setVisible(true);
@@ -334,7 +339,8 @@ void UserDesktopGUI::onShowAvailableButtonClicked()
 
 void UserDesktopGUI::onAvailableRoomsButtonClicked()
 {
-    adjustSize();
+    this->adjustSize();
+
     hotelNameBoxLabel->setVisible(true);
     hotelNameBox->setVisible(true);
     homeButton->setVisible(true);
@@ -350,6 +356,8 @@ void UserDesktopGUI::onAvailableRoomsButtonClicked()
 
 void UserDesktopGUI::findRoomButtonClicked()
 {
+    this->adjustSize();
+
     outRoomIdLabel->setVisible(true);
     roomIdField->setVisible(true);
     outRoomAvailabilityLabel->setVisible(true);
@@ -368,8 +376,10 @@ void UserDesktopGUI::findRoomButtonClicked()
 
 void UserDesktopGUI::homeButtonClicked()
 {
-    adjustSize();
+    this->adjustSize();
+
     label->setText("Room Menu");
+
     createRoomButton->setVisible(true);
     readRoomButton->setVisible(true);
     updateRoomButton->setVisible(true);
@@ -423,7 +433,10 @@ void UserDesktopGUI::homeButtonClicked()
 
 void UserDesktopGUI::onReadroomClicked()
 {
+    this->adjustSize();
+
     label->setText("Read Room");
+
     outHotelNameLabel->setVisible(true);
     hotelNameField->setVisible(true);
     hotelNameField->setReadOnly(false);
@@ -446,16 +459,21 @@ void UserDesktopGUI::onReadroomClicked()
 
 void UserDesktopGUI::onUpdateButtonClicked()
 {
+    this->adjustSize();
+
     user_presenter->UpdateRoom();
     user_presenter->populateRoomData();
     user_presenter->populateFacilities();
-    adjustSize();
 }
 
 void UserDesktopGUI::onUpdateroomClicked()
 {
+    this->adjustSize();
+
     onReadroomClicked();
+    
     label->setText("Update Room");
+    
     hotelNameField->setReadOnly(false);
     roomNumberField->setReadOnly(false);
     roomIdField->setReadOnly(false);
@@ -475,7 +493,10 @@ void UserDesktopGUI::onDeleteClicked()
 
 void UserDesktopGUI::onDeleteRoomClicked()
 {
+    this->adjustSize();
+
     onReadroomClicked();
+    
     label->setText("Delete Room");
     findRoomButton->setVisible(false);
     deleteButton->setVisible(true);
@@ -486,12 +507,14 @@ void UserDesktopGUI::onCreateClicked()
     user_presenter->CreateRoom();
     user_presenter->populateRoomData();
     user_presenter->populateFacilities();
-    adjustSize();
 }
 
 void UserDesktopGUI::onCreateRoomClicked()
 {
+    this->adjustSize();
+
     label->setText("Create Room");
+
     outHotelNameLabel->setVisible(true);
     hotelNameField->setVisible(true);
     hotelNameField->setReadOnly(false);
@@ -543,10 +566,14 @@ void UserDesktopGUI::onCreateRoomClicked()
 
 void UserDesktopGUI::onLogInClicked() 
 {
-    adjustSize();
+    this->adjustSize();
+
     user_presenter->HandleLogin();
+    
     if (is_logged_in)
     {
+        label->setText("Room Menu");
+
         loginButton->setVisible(false);
         usernameLabel->setVisible(false);
         usernameField->setVisible(false);
@@ -559,14 +586,12 @@ void UserDesktopGUI::onLogInClicked()
         logoutButton->setVisible(true);
         availableRoomsButton->setVisible(true);
         filterRoomsButton->setVisible(true);
-        label->setText("Room Menu");
     }
-  
 }
 
 void UserDesktopGUI::onLogOutClicked() 
 {
-    adjustSize();
+    this->adjustSize();
 
     loginButton->setVisible(true);
     usernameLabel->setVisible(true);
@@ -586,7 +611,6 @@ void UserDesktopGUI::onLogOutClicked()
     showAvailableButton->setVisible(false);
 
     user_presenter->HandleLogOut();
-
 }
 
 void UserDesktopGUI::SetHotelName(const std::string &hotel_name) 

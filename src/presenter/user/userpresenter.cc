@@ -2,6 +2,7 @@
 #include <set>
 #include <vector>
 #include "userpresenter.h"
+#include <iostream>
 
 std::string VecToStr(std::vector<std::string> vec)
 {
@@ -121,37 +122,46 @@ void UserPresenter::DeleteRoom()
 
 void UserPresenter::populateRoomData() 
 {
+    printf("Populating room data at line: %d\n", __LINE__);
     std::vector<Room> rooms = room_table->ListRooms();
     std::set<std::string> uniqueHotelNames;
     std::set<bool> uniqueAvailability;
+    std::set<double> uniquePrices;
+    std::set<std::string> uniquePositions;
+    std::set<std::string> uniqueLocations;
 
     for (const Room &room : rooms) 
     {
-        user_gui->SetRoomPriceBox(room.GetPrice());
-        user_gui->SetRoomLocationBox(room.GetLocation());
-        user_gui->SetRoomPositionBox(room.GetPosition());
         uniqueHotelNames.insert(room.GetHotelName());
         uniqueAvailability.insert(room.GetAvailability());
+        uniquePrices.insert(room.GetPrice());
+        uniquePositions.insert(room.GetPosition());
+        uniqueLocations.insert(room.GetLocation());
     }
 
-    std::vector<std::string> sortedHotelNames(uniqueHotelNames.begin(), uniqueHotelNames.end());
-    std::sort(sortedHotelNames.begin(), sortedHotelNames.end());
-
-    for (const std::string &hotelName : sortedHotelNames) 
+    for (const std::string &hotelName : uniqueHotelNames) 
     {
         user_gui->SetHotelNameBox(hotelName);
     }
 
-    std::vector<std::string> sortedAvailability;
     for (bool availability : uniqueAvailability) 
     {
-        sortedAvailability.push_back(availability ? "Available" : "Not Available");
+        user_gui->SetRoomAvailabilityBox(availability ? "Available" : "Not Available");
     }
-    std::sort(sortedAvailability.begin(), sortedAvailability.end());
 
-    for (const std::string &availabilityStr : sortedAvailability) 
+    for (double price : uniquePrices) 
     {
-        user_gui->SetRoomAvailabilityBox(availabilityStr);
+        user_gui->SetRoomPriceBox(price);
+    }
+
+    for (const std::string &position : uniquePositions) 
+    {
+        user_gui->SetRoomPositionBox(position);
+    }
+
+    for (const std::string &location : uniqueLocations) 
+    {
+        user_gui->SetRoomLocationBox(location);
     }
 }
 

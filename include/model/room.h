@@ -7,8 +7,8 @@
 class Room
 {
 public:
-    Room(int id, const std::string& location, std::string position, int number, bool is_available, 
-        double price, const std::vector<std::string>& facilities);
+    Room(int id, const std::string& location, std::string position, int number, 
+        bool is_available, double price, const std::vector<std::string>& facilities);
 
     int GetId() const;
     int GetNumber() const;
@@ -31,6 +31,7 @@ public:
     bool MatchesFilter(const std::string& location, bool availability, double max_price, const std::vector<std::string>& required_facilities) const;
 
 private:
+    std::string hotel_name;
     int id;
     int number;
     std::string location;
@@ -38,7 +39,6 @@ private:
     bool availability;
     std::string position;
     std::vector<std::string> facilities; 
-    std::string hotel_name;
 
 };
 

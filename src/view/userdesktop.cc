@@ -246,6 +246,7 @@ UserDesktopGUI::UserDesktopGUI(QWidget *parent)
     connect(updateButton, &QPushButton::clicked, this, &UserDesktopGUI::onUpdateButtonClicked);
     connect(deleteRoomButton, &QPushButton::clicked, this, &UserDesktopGUI::onDeleteRoomClicked);
     connect(deleteButton, &QPushButton::clicked, this, &UserDesktopGUI::onDeleteClicked);
+    
     connect(availableRoomsButton, &QPushButton::clicked, this, &UserDesktopGUI::onAvailableRoomsButtonClicked);
     connect(showAvailableButton, &QPushButton::clicked, this, &UserDesktopGUI::onShowAvailableButtonClicked);
     connect(filterRoomsButton, &QPushButton::clicked, this, &UserDesktopGUI::onFilterRoomsButtonClicked);

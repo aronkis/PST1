@@ -23,8 +23,6 @@ public:
     virtual std::string GetFacilities() = 0;
     virtual void SetRoomFacilities(const std::string &facilities) = 0;
     virtual std::string GetUsername() = 0;
-    virtual std::string GetUserPassword() = 0;
-    virtual std::string GetHotelNameBox() = 0;
     virtual void SetHotelNameBox(const std::string &hotel_name) = 0;
     virtual std::string GetRoomAvailabilityBox() = 0;
     virtual void SetRoomAvailabilityBox(std::string availability) = 0;
@@ -36,8 +34,9 @@ public:
     virtual void SetRoomPositionBox(const std::string &position) = 0;
     virtual std::string GetFacilitiesBox() = 0;
     virtual void SetRoomFacilitiesBox(const std::string &facilities) = 0;
+    virtual std::string GetUserPassword() = 0;
+    virtual std::string GetHotelNameBox() = 0;
     virtual void SetLoggedIn(bool logged_in) = 0;
-
 };
 
 #endif // USERGUI_H

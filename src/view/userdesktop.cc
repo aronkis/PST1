@@ -6,22 +6,7 @@
 #include <QDebug>
 #include <QLineEdit>
 #include "userdesktop.h"
-#include "userpresenter.h"
-
-int openFileDlg(std::string& fname) 
-{
-    QString fileName = QFileDialog::getOpenFileName(
-        nullptr, "Open File", "../", "*"
-    );
-
-    if (!fileName.isEmpty()) 
-    {
-        fname = fileName.toStdString();
-        return 1; 
-    }
-
-    return 0; 
-}
+#include "userpresenter.h" 
 
 UserDesktopGUI::UserDesktopGUI(QWidget *parent)
     : QMainWindow(parent), 
@@ -64,23 +49,10 @@ UserDesktopGUI::UserDesktopGUI(QWidget *parent)
       userTable(&database),
       user_presenter(new UserPresenter(this, &roomTable, &userTable)) 
 {
-    std::string fileName;
-    if (!openFileDlg(fileName)) 
-    {
-        QMessageBox::critical(this, "Database Error", "No database selected!");
-        exit(0);
-        return;
-    }
-
-    if (!database.OpenConnection(fileName)) 
-    {
-        QMessageBox::critical(this, "Database Error", "Failed to open the database connection.");
-        exit(0);
-        return;
-    }
+    user_presenter->OpenDatabase();
     
-    user_presenter->populateRoomData();
-    user_presenter->populateFacilities();
+    user_presenter->PopulateRoomData();
+    user_presenter->PopulateFacilities();
     
     setCentralWidget(centralWidget);
     centralWidget->setLayout(layout);
@@ -379,7 +351,7 @@ void UserDesktopGUI::homeButtonClicked()
 {
     this->adjustSize();
 
-    label->setText("Room Menu");
+    label->setText("User Menu");
 
     createRoomButton->setVisible(true);
     readRoomButton->setVisible(true);
@@ -438,10 +410,8 @@ void UserDesktopGUI::onReadroomClicked()
 
     label->setText("Read Room");
 
-    outHotelNameLabel->setVisible(true);
-    hotelNameField->setVisible(true);
-    hotelNameField->setReadOnly(false);
-    hotelNameField->clear();
+    hotelNameBoxLabel->setVisible(true);
+    hotelNameBox->setVisible(true);
 
     outRoomNumberLabel->setVisible(true);
     roomNumberField->setVisible(true);
@@ -456,6 +426,8 @@ void UserDesktopGUI::onReadroomClicked()
     updateRoomButton->setVisible(false);
     deleteRoomButton->setVisible(false);
     logoutButton->setVisible(false);
+    availableRoomsButton->setVisible(false);
+    filterRoomsButton->setVisible(false);
 }
 
 void UserDesktopGUI::onUpdateButtonClicked()
@@ -463,8 +435,8 @@ void UserDesktopGUI::onUpdateButtonClicked()
     this->adjustSize();
 
     user_presenter->UpdateRoom();
-    user_presenter->populateRoomData();
-    user_presenter->populateFacilities();
+    user_presenter->PopulateRoomData();
+    user_presenter->PopulateFacilities();
 }
 
 void UserDesktopGUI::onUpdateroomClicked()
@@ -483,6 +455,8 @@ void UserDesktopGUI::onUpdateroomClicked()
     locationField->setReadOnly(false);
     positionField->setReadOnly(false);
     facilitiesField->setReadOnly(false);
+    availableRoomsButton->setVisible(false);
+    filterRoomsButton->setVisible(false);
 
     updateButton->setVisible(true);
 }
@@ -500,14 +474,16 @@ void UserDesktopGUI::onDeleteRoomClicked()
     
     label->setText("Delete Room");
     findRoomButton->setVisible(false);
+    availableRoomsButton->setVisible(false);
+    filterRoomsButton->setVisible(false);
     deleteButton->setVisible(true);
 }
 
 void UserDesktopGUI::onCreateClicked()
 {
     user_presenter->CreateRoom();
-    user_presenter->populateRoomData();
-    user_presenter->populateFacilities();
+    user_presenter->PopulateRoomData();
+    user_presenter->PopulateFacilities();
 }
 
 void UserDesktopGUI::onCreateRoomClicked()
@@ -563,6 +539,8 @@ void UserDesktopGUI::onCreateRoomClicked()
     updateRoomButton->setVisible(false);
     deleteRoomButton->setVisible(false);
     logoutButton->setVisible(false);
+    availableRoomsButton->setVisible(false);
+    filterRoomsButton->setVisible(false);
 }
 
 void UserDesktopGUI::onLogInClicked() 
@@ -573,7 +551,7 @@ void UserDesktopGUI::onLogInClicked()
     
     if (is_logged_in)
     {
-        label->setText("Room Menu");
+        label->setText("User Menu");
 
         loginButton->setVisible(false);
         usernameLabel->setVisible(false);
@@ -593,6 +571,7 @@ void UserDesktopGUI::onLogInClicked()
 void UserDesktopGUI::onLogOutClicked() 
 {
     this->adjustSize();
+    label->setText("You've been logged out!\n         Login in again!");
 
     loginButton->setVisible(true);
     usernameLabel->setVisible(true);
@@ -612,6 +591,11 @@ void UserDesktopGUI::onLogOutClicked()
     showAvailableButton->setVisible(false);
 
     user_presenter->HandleLogOut();
+}
+
+void UserDesktopGUI::SetDatabase(std::string path)
+{
+    database.OpenConnection(path);
 }
 
 void UserDesktopGUI::SetHotelName(const std::string &hotel_name) 
@@ -761,16 +745,19 @@ std::string UserDesktopGUI::GetRoomPositionBox()
     return roomPositionBox->currentText().toStdString();
 }
 
-std::string UserDesktopGUI::GetFacilitiesBox()
+bool UserDesktopGUI::GetFacilitiesBoxItemState(int pos)
 {
-    QStringList selectedFacilities;
-    for (int i = 0; i < facilitiesListWidget->count(); ++i) {
-        QListWidgetItem *item = facilitiesListWidget->item(i);
-        if (item->checkState() == Qt::Checked) {
-            selectedFacilities.append(item->text());
-        }
-    }
-    return selectedFacilities.join(", ").toStdString();
+   return facilitiesListWidget->item(pos)->checkState() == Qt::Checked;
+}
+
+std::string UserDesktopGUI::GetFacilitiesBoxItemValue(int pos)
+{
+   return facilitiesListWidget->item(pos)->text().toStdString();
+}
+
+int UserDesktopGUI::GetFacilitiesCount()
+{
+    return facilitiesListWidget->count();
 }
 
 void UserDesktopGUI::SetLoggedIn(bool logged_in)

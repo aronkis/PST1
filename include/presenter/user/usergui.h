@@ -6,6 +6,7 @@
 class UserGUI 
 {
 public:
+    virtual void SetDatabase(std::string path) = 0;
     virtual std::string GetHotelName() = 0;
     virtual void SetHotelName(const std::string &hotel_name) = 0;
     virtual int GetRoomId() = 0;
@@ -32,7 +33,9 @@ public:
     virtual void SetRoomLocationBox(const std::string &location) = 0;
     virtual std::string GetRoomPositionBox() = 0;
     virtual void SetRoomPositionBox(const std::string &position) = 0;
-    virtual std::string GetFacilitiesBox() = 0;
+    virtual bool GetFacilitiesBoxItemState(int pos) = 0;
+    virtual std::string GetFacilitiesBoxItemValue(int pos) = 0;
+    virtual int GetFacilitiesCount() = 0;
     virtual void SetRoomFacilitiesBox(const std::string &facilities) = 0;
     virtual std::string GetUserPassword() = 0;
     virtual std::string GetHotelNameBox() = 0;

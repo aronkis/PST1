@@ -1,4 +1,5 @@
 #include <QMessageBox>
+#include <QFileDialog>
 #include <set>
 #include <vector>
 #include "userpresenter.h"
@@ -63,7 +64,7 @@ void UserPresenter::CreateRoom()
 
 void UserPresenter::ReadRoom() 
 {
-    std::string hotel_name = user_gui->GetHotelName();
+    std::string hotel_name = user_gui->GetHotelNameBox();
     int room_number = user_gui->GetRoomNumber();
 
     Room room = room_table->ReadRoom(hotel_name, room_number);
@@ -82,7 +83,13 @@ void UserPresenter::ReadRoom()
     } 
     else 
     {
-        QMessageBox::critical(nullptr, "Error", "Failed to read room.");
+        user_gui->SetRoomId(-1);
+        user_gui->SetRoomAvailability("N/A");
+        user_gui->SetRoomNumber(-1);
+        user_gui->SetRoomPrice(-1.0);
+        user_gui->SetRoomLocation("N/A");
+        user_gui->SetRoomPosition("N/A");
+        user_gui->SetRoomFacilities("N/A");
     }
 }
 
@@ -120,10 +127,15 @@ void UserPresenter::DeleteRoom()
     }
 }
 
-void UserPresenter::populateRoomData() 
+void UserPresenter::PopulateRoomData() 
 {
-    printf("Populating room data at line: %d\n", __LINE__);
     std::vector<Room> rooms = room_table->ListRooms();
+    if (rooms.empty())
+    {
+        QMessageBox::critical(nullptr, "Error", "No database loaded or database is empty.");
+        exit(0);
+    }
+
     std::set<std::string> uniqueHotelNames;
     std::set<bool> uniqueAvailability;
     std::set<double> uniquePrices;
@@ -165,9 +177,16 @@ void UserPresenter::populateRoomData()
     }
 }
 
-void UserPresenter::populateFacilities() 
+void UserPresenter::PopulateFacilities() 
 {
+    
     std::vector<Room> rooms = room_table->ListRooms();
+    if (rooms.empty())
+    {
+        QMessageBox::critical(nullptr, "Error", "No database loaded or database is empty.");
+        exit(0);
+    }
+
     std::set<std::string> uniqueFacilities;
 
     for (const Room &room : rooms) 
@@ -271,7 +290,14 @@ void UserPresenter::DisplayRoomDetails()
 }
 void UserPresenter::FilterRooms() 
 {
-    std::vector<std::string> facilities = room_table->splitString(user_gui->GetFacilitiesBox(), ',');
+    std::vector<std::string> facilities;
+    for (int i = 0; i < user_gui->GetFacilitiesCount(); i++)
+    {
+        if (user_gui->GetFacilitiesBoxItemState(i))
+        {
+            facilities.push_back(user_gui->GetFacilitiesBoxItemValue(i));
+        }
+    }
     bool availability = user_gui->GetRoomAvailabilityBox() == "Available";
 
     std::vector<Room> rooms = room_table->FilterRooms(user_gui->GetRoomLocationBox(), 
@@ -288,4 +314,22 @@ void UserPresenter::FilterRooms()
     {
         current_page = 0;
     }
+}
+
+void UserPresenter::OpenDatabase()
+{
+    QString path = QFileDialog::getOpenFileName(
+        nullptr, "Open File", "../", "*"
+    );
+
+    if (!path.isEmpty()) 
+    {
+        user_gui->SetDatabase(path.toStdString());        
+    }
+    else
+    {
+        QMessageBox::critical(nullptr, "Database Error", "No database selected!");
+        exit(0);
+    }
+
 }

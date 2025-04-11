@@ -23,7 +23,6 @@ void Database::SetConnection(sqlite3* connection)
     }
     db = connection;  
 
-    std::cout << "Database connection set." << std::endl;
 }
 
 bool Database::OpenConnection(const std::string& path) 
@@ -31,12 +30,10 @@ bool Database::OpenConnection(const std::string& path)
     if (sqlite3_open(path.c_str(), &db) != SQLITE_OK) 
     {
         return 0;
-        std::cerr << "Can't open database: " << sqlite3_errmsg(db) << std::endl;
     } 
     else 
     {
         return 1;
-        std::cout << "Opened database successfully: " << path << std::endl;
     }
 }
 
@@ -46,7 +43,6 @@ void Database::CloseConnection()
     {
         sqlite3_close(db);
         db = nullptr;
-        std::cout << "Database connection closed." << std::endl;
     }
 }
 
@@ -88,6 +84,7 @@ std::vector<std::vector<std::string>> Database::ExecuteSQLQuery(const std::strin
     {
         std::cerr << "SQL error: " << errorMessage << std::endl;
         sqlite3_free(errorMessage);
+        return {};
     }
 
     return result;

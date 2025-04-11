@@ -23,6 +23,7 @@ class UserDesktopGUI : public QMainWindow, public UserGUI
 public:
     explicit UserDesktopGUI(QWidget *parent = nullptr);
     ~UserDesktopGUI();
+    void SetDatabase(std::string path) override;
     int GetRoomId() override;
     void SetRoomId(int id) override;
     int GetRoomNumber() override;
@@ -52,7 +53,9 @@ public:
     double GetRoomPriceBox() override;
     std::string GetRoomLocationBox() override;
     std::string GetRoomPositionBox() override;
-    std::string GetFacilitiesBox() override;
+    bool GetFacilitiesBoxItemState(int pos) override;
+    std::string GetFacilitiesBoxItemValue(int pos) override;
+    int GetFacilitiesCount() override;
     void SetLoggedIn(bool logged_in) override;
 
 private:

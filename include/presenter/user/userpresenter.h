@@ -16,13 +16,14 @@ public:
     void ReadRoom();
     void UpdateRoom();
     void DeleteRoom(); 
-    void populateRoomData(); 
-    void populateFacilities(); 
+    void PopulateRoomData(); 
+    void PopulateFacilities(); 
     void GetAvailableRooms();
     void DisplayRoomDetails();
     void LoadNextRoomDetails();
     void LoadPrevRoomDetails();
     void FilterRooms();
+    void OpenDatabase();
 
 private:
     UserGUI *user_gui;     

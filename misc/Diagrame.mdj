@@ -143,7 +143,7 @@
 							"left": 48,
 							"top": 32,
 							"width": 1472,
-							"height": 1136,
+							"height": 1088,
 							"nameCompartment": {
 								"$ref": "AAAAAAGVwvwLdiQa5h0="
 							}
@@ -4053,7 +4053,7 @@
 											"font": "Arial;13;1",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1285,
+											"top": 1255,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "UserGUI"
@@ -4094,7 +4094,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 1200,
-									"top": 1278,
+									"top": 1248,
 									"width": 298.91064453125,
 									"height": 25,
 									"stereotypeLabel": {
@@ -4140,6 +4140,25 @@
 									"subViews": [
 										{
 											"_type": "UMLOperationView",
+											"_id": "AAAAAAGWJZrnA7Rgu80=",
+											"_parent": {
+												"$ref": "AAAAAAGVw3s12Oz+wgQ="
+											},
+											"model": {
+												"$ref": "AAAAAAGWJZrm8LRdkgs="
+											},
+											"fillColor": "#9BFF38",
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 1205,
+											"top": 1278,
+											"width": 288.91064453125,
+											"height": 13,
+											"text": "+SetDatabase(path: string): void",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
 											"_id": "AAAAAAGV7hZnBF2JaC8=",
 											"_parent": {
 												"$ref": "AAAAAAGVw3s12Oz+wgQ="
@@ -4151,7 +4170,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1308,
+											"top": 1293,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetHotelName(): string",
@@ -4170,7 +4189,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1323,
+											"top": 1308,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetHotelName(hotel_name: string): void",
@@ -4189,7 +4208,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1338,
+											"top": 1323,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetRoomId(): int",
@@ -4208,7 +4227,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1353,
+											"top": 1338,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomId(id: int): void",
@@ -4227,7 +4246,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1368,
+											"top": 1353,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetRoomNumber(): int",
@@ -4246,7 +4265,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1383,
+											"top": 1368,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomNumber(number: int): void",
@@ -4265,7 +4284,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1398,
+											"top": 1383,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetRoomAvailability(): bool",
@@ -4284,7 +4303,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1413,
+											"top": 1398,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomAvailability(availability: bool): void",
@@ -4303,7 +4322,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1428,
+											"top": 1413,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetRoomPrice(): double",
@@ -4322,7 +4341,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1443,
+											"top": 1428,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomPrice(price: double): void",
@@ -4341,7 +4360,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1458,
+											"top": 1443,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetRoomLocation(): string",
@@ -4360,7 +4379,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1473,
+											"top": 1458,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomLocation(location: string): void",
@@ -4379,7 +4398,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1488,
+											"top": 1473,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetPosition(): string",
@@ -4398,7 +4417,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1503,
+											"top": 1488,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomPosition(position: string): void",
@@ -4417,7 +4436,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1518,
+											"top": 1503,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetFacilities(): string",
@@ -4436,7 +4455,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1533,
+											"top": 1518,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomFacilities(facilities: string): void",
@@ -4475,7 +4494,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1548,
+											"top": 1533,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetHotelNameBox(): string",
@@ -4494,7 +4513,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1563,
+											"top": 1548,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetHotelNameBox(hotel_name: string): void",
@@ -4513,7 +4532,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1578,
+											"top": 1563,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetRoomAvailabilityBox(): string",
@@ -4532,7 +4551,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1593,
+											"top": 1578,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomAvailabilityBox(availability: string): void",
@@ -4551,7 +4570,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1608,
+											"top": 1593,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetRoomPriceBox(): double",
@@ -4570,7 +4589,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1623,
+											"top": 1608,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomPriceBox(price: double): void",
@@ -4589,7 +4608,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1638,
+											"top": 1623,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetRoomLocationBox(): string",
@@ -4608,7 +4627,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1653,
+											"top": 1638,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomLocationBox(location: string): void",
@@ -4627,7 +4646,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1668,
+											"top": 1653,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetRoomPositionBox(): string",
@@ -4646,7 +4665,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1683,
+											"top": 1668,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomPositionBox(position: string): void",
@@ -4654,12 +4673,31 @@
 										},
 										{
 											"_type": "UMLOperationView",
-											"_id": "AAAAAAGWFaj78ZHkncY=",
+											"_id": "AAAAAAGWJX0/9sY+3Wo=",
 											"_parent": {
 												"$ref": "AAAAAAGVw3s12Oz+wgQ="
 											},
 											"model": {
-												"$ref": "AAAAAAGWFaj77ZHhHIE="
+												"$ref": "AAAAAAGWJX0/3MY765g="
+											},
+											"fillColor": "#9BFF38",
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 1205,
+											"top": 1683,
+											"width": 288.91064453125,
+											"height": 13,
+											"text": "+GetFacilitiesBoxItemState(pos: int): bool",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGWJX1Eicv2eYc=",
+											"_parent": {
+												"$ref": "AAAAAAGVw3s12Oz+wgQ="
+											},
+											"model": {
+												"$ref": "AAAAAAGWJX1Eg8vz9vs="
 											},
 											"fillColor": "#9BFF38",
 											"font": "Arial;13;0",
@@ -4668,7 +4706,26 @@
 											"top": 1698,
 											"width": 288.91064453125,
 											"height": 13,
-											"text": "+GetFacilitiesBox(): string",
+											"text": "+GetFacilitiesCount(): int",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGWJX1ECMkavJQ=",
+											"_parent": {
+												"$ref": "AAAAAAGVw3s12Oz+wgQ="
+											},
+											"model": {
+												"$ref": "AAAAAAGWJX1D9skXWc4="
+											},
+											"fillColor": "#9BFF38",
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 1205,
+											"top": 1713,
+											"width": 288.91064453125,
+											"height": 13,
+											"text": "+GetFacilitiesBoxItemValue(pos: int): string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4684,7 +4741,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1713,
+											"top": 1728,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetRoomFacilitiesBox(facilities: string): void",
@@ -4703,7 +4760,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1728,
+											"top": 1743,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetClientId(): int",
@@ -4722,7 +4779,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1743,
+											"top": 1758,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetClientId(id: int): void",
@@ -4741,7 +4798,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1758,
+											"top": 1773,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetClientName(): string",
@@ -4760,7 +4817,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1773,
+											"top": 1788,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetClientName(name: string): void",
@@ -4779,7 +4836,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1788,
+											"top": 1803,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetClientEmail(): string",
@@ -4798,7 +4855,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1803,
+											"top": 1818,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetClientEmail(): void",
@@ -4817,7 +4874,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1818,
+											"top": 1833,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetClientPhoneNumber(): string",
@@ -4836,7 +4893,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1833,
+											"top": 1848,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetClientPhoneNumber(number: string): void",
@@ -4855,7 +4912,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1848,
+											"top": 1863,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetUserId(): int",
@@ -4874,7 +4931,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1863,
+											"top": 1878,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetUserId(id: int): void",
@@ -4893,7 +4950,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1878,
+											"top": 1893,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetUsername(): string",
@@ -4912,7 +4969,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1893,
+											"top": 1908,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetUsername(username: string): void",
@@ -4931,7 +4988,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1908,
+											"top": 1923,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetUserEmail(): string",
@@ -4950,7 +5007,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1923,
+											"top": 1938,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetUserEmail(email: string): void",
@@ -4969,7 +5026,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1938,
+											"top": 1953,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetUserPassword(): string",
@@ -4988,7 +5045,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1953,
+											"top": 1968,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetUserPassword(password: string): void",
@@ -5007,7 +5064,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1968,
+											"top": 1983,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetUserLoggedIn(): bool",
@@ -5026,7 +5083,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1983,
+											"top": 1998,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetUserLoggedIn(logged_in: bool): void",
@@ -5045,7 +5102,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 1998,
+											"top": 2013,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+GetUserRole(): int",
@@ -5064,7 +5121,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 2013,
+											"top": 2028,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetUserRole(role: int): void",
@@ -5083,7 +5140,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1205,
-											"top": 2028,
+											"top": 2043,
 											"width": 288.91064453125,
 											"height": 13,
 											"text": "+SetLoggedIn(logged_in: bool): void",
@@ -5094,9 +5151,9 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 1200,
-									"top": 1303,
+									"top": 1273,
 									"width": 298.91064453125,
-									"height": 743
+									"height": 788
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -5145,7 +5202,7 @@
 							"left": 1200,
 							"top": 1224,
 							"width": 297.91064453125,
-							"height": 822,
+							"height": 837,
 							"stereotypeDisplay": "icon",
 							"nameCompartment": {
 								"$ref": "AAAAAAGVw3s12Oz49OY="
@@ -10408,6 +10465,25 @@
 											"height": 13,
 											"text": "+DisplayPrevUserDetails(): void",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGWJZxEwCnGS+Y=",
+											"_parent": {
+												"$ref": "AAAAAAGVw57VhlwwX9k="
+											},
+											"model": {
+												"$ref": "AAAAAAGWJZxEpCmoPJA="
+											},
+											"fillColor": "#9BFF3880",
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 829,
+											"top": 1970,
+											"width": 320.75048828125,
+											"height": 13,
+											"text": "+OpenDatabase(): void",
+											"horizontalAlignment": 0
 										}
 									],
 									"fillColor": "#9BFF3880",
@@ -10416,7 +10492,7 @@
 									"left": 824,
 									"top": 1560,
 									"width": 330.75048828125,
-									"height": 413
+									"height": 428
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -10465,7 +10541,7 @@
 							"left": 824,
 							"top": 1392,
 							"width": 329.75048828125,
-							"height": 581,
+							"height": 596,
 							"nameCompartment": {
 								"$ref": "AAAAAAGVw57VhVwquj8="
 							},
@@ -15089,7 +15165,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1307,
-									"top": 2065,
+									"top": 2080,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -15111,7 +15187,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1320,
-									"top": 2068,
+									"top": 2083,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -15133,7 +15209,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1279,
-									"top": 2061,
+									"top": 2076,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -15248,7 +15324,7 @@
 							"tail": {
 								"$ref": "AAAAAAGVw3s12Oz3yK4="
 							},
-							"points": "1292:2046;1292:2759;1176:2759",
+							"points": "1292:2061;1292:2759;1176:2759",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGV7jo0zZzJv1k="
@@ -15593,7 +15669,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1040,
-									"top": 2075,
+									"top": 2083,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -15615,7 +15691,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1055,
-									"top": 2075,
+									"top": 2083,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -15637,7 +15713,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1010,
-									"top": 2076,
+									"top": 2084,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -15659,7 +15735,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1040,
-									"top": 1992,
+									"top": 2007,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -15681,7 +15757,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1053,
-									"top": 1995,
+									"top": 2010,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -15703,7 +15779,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1012,
-									"top": 1988,
+									"top": 2003,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -15818,7 +15894,7 @@
 							"tail": {
 								"$ref": "AAAAAAGVw57VhVwpG4k="
 							},
-							"points": "1025:1973;1025:2192",
+							"points": "1025:1988;1025:2192",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGV7jq+R0SJabo="
@@ -17877,6 +17953,34 @@
 							"operations": [
 								{
 									"_type": "UMLOperation",
+									"_id": "AAAAAAGWJZrm8LRdkgs=",
+									"_parent": {
+										"$ref": "AAAAAAGVw3s12Oz1FlQ="
+									},
+									"name": "SetDatabase",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGWJZtxJxs0amA=",
+											"_parent": {
+												"$ref": "AAAAAAGWJZrm8LRdkgs="
+											},
+											"name": "path",
+											"type": "string"
+										},
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGWJZtxKBs1XSw=",
+											"_parent": {
+												"$ref": "AAAAAAGWJZrm8LRdkgs="
+											},
+											"type": "void",
+											"direction": "return"
+										}
+									]
+								},
+								{
+									"_type": "UMLOperation",
 									"_id": "AAAAAAGV7hZm9F2GpJs=",
 									"_parent": {
 										"$ref": "AAAAAAGVw3s12Oz1FlQ="
@@ -18516,17 +18620,73 @@
 								},
 								{
 									"_type": "UMLOperation",
-									"_id": "AAAAAAGWFaj77ZHhHIE=",
+									"_id": "AAAAAAGWJX0/3MY765g=",
 									"_parent": {
 										"$ref": "AAAAAAGVw3s12Oz1FlQ="
 									},
-									"name": "GetFacilitiesBox",
+									"name": "GetFacilitiesBoxItemState",
 									"parameters": [
 										{
 											"_type": "UMLParameter",
-											"_id": "AAAAAAGWFakST5S+2y8=",
+											"_id": "AAAAAAGWJX1V4dEi+9A=",
 											"_parent": {
-												"$ref": "AAAAAAGWFaj77ZHhHIE="
+												"$ref": "AAAAAAGWJX0/3MY765g="
+											},
+											"name": "pos",
+											"type": "int"
+										},
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGWJX1V4tEjnBg=",
+											"_parent": {
+												"$ref": "AAAAAAGWJX0/3MY765g="
+											},
+											"type": "bool",
+											"direction": "return"
+										}
+									]
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAGWJX1Eg8vz9vs=",
+									"_parent": {
+										"$ref": "AAAAAAGVw3s12Oz1FlQ="
+									},
+									"name": "GetFacilitiesCount",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGWJX2tmQE4ZfI=",
+											"_parent": {
+												"$ref": "AAAAAAGWJX1Eg8vz9vs="
+											},
+											"type": "int",
+											"direction": "return"
+										}
+									]
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAGWJX1D9skXWc4=",
+									"_parent": {
+										"$ref": "AAAAAAGVw3s12Oz1FlQ="
+									},
+									"name": "GetFacilitiesBoxItemValue",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGWJX1m7tSBswQ=",
+											"_parent": {
+												"$ref": "AAAAAAGWJX1D9skXWc4="
+											},
+											"name": "pos",
+											"type": "int"
+										},
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGWJX1m79SCT6k=",
+											"_parent": {
+												"$ref": "AAAAAAGWJX1D9skXWc4="
 											},
 											"type": "string",
 											"direction": "return"
@@ -20014,6 +20174,25 @@
 											"_id": "AAAAAAGWFbMwHV02+40=",
 											"_parent": {
 												"$ref": "AAAAAAGWFbMWelpZ5a8="
+											},
+											"type": "void",
+											"direction": "return"
+										}
+									]
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAGWJZxEpCmoPJA=",
+									"_parent": {
+										"$ref": "AAAAAAGVw57VhVwnsKw="
+									},
+									"name": "OpenDatabase",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGWJZxc3SyF+HU=",
+											"_parent": {
+												"$ref": "AAAAAAGWJZxEpCmoPJA="
 											},
 											"type": "void",
 											"direction": "return"
